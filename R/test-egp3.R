@@ -1,8 +1,7 @@
-context("egp3")
+test_egp3 <- function(){
+  ## texmex erroneously does not export qegp3 (2022-05-10)
+  qegp3 <- texmex:::qegp3
 
-test_that("egp3 family behaves as it should", {
-  skip_on_cran()
-  skip_on_travis()
   library(MASS)
   rmod <- rlm(log(ALT.M) ~ log(ALT.B) + as.numeric(dose), data=liver, method="MM", c=3.44)
   liver$r <- resid(rmod)
@@ -13,23 +12,19 @@ test_that("egp3 family behaves as it should", {
   e3mod <- evm(liver[liver$dose == "D", "r"], qu=.6, family=egp3, priorParameters=pp)
 
   # Test the point estimates, standard errors and t-values all at once
-  expect_that(coef(summary(gpmod)), equals(coef(summary(e3mod))[-1, ], tol=.0001), label="egp3: matches gpd")
+  expect_equal(coef(summary(gpmod)), coef(summary(e3mod))[-1, ], tolerance = .0001, label="egp3: matches gpd")
 
   # Check SEs on return levels - derivatives were worked out manually (by Paul),
   # also by Sage and (I think) by Wolfram
   rgp <- do.call("rbind", predict(gpmod, M=seq(100, 2000, by=100), se.fit=TRUE)$obj)
   re3 <- do.call("rbind", predict(e3mod,  M=seq(100, 2000, by=100), se.fit=TRUE)$obj)
-  expect_that(rgp, equals(re3, tol=.0001), label="egp3: return levels")
+  expect_equal(rgp, re3, tolerance=.0001, label="egp3: return levels")
 
   # Check that the plot for the Nidd data has generally similar shape to that in
   # Papastathopoulos and Tawn: they use EGP1, not 3, so the plots won't be the same
   plot(egp3RangeFit(nidd, umin=65, umax=90, nint=50), pch=16)
 
-  })
-
-test_that("regp3 behaves as it should", {
-  skip_on_cran()
-  skip_on_travis()
+## regp3 behaves as it should
   regp3_test <- function(n, kappa=1, sigma, xi, u=0){
     # Implement rng via direct cdf inversion and compare to version that uses qegp3
     kappa <- rep(kappa, length.out=n)
@@ -60,15 +55,13 @@ test_that("regp3 behaves as it should", {
     kappa <- runif(1); sigma <- runif(1, .1, 6); xi <- runif(1); u <- runif(1, -10, 10)
     x1 <- sort(regp3_test(1000, kappa=.5, sigma=2, xi=.2, u=6))
     x2 <- sort(regp3(1000, kappa=.5, sigma=2, xi=.2, u=6))
-    expect_gt(cor(x1, x2), 0.85)
+    expect_true(cor(x1, x2) > 0.85)
     plot(x1, x2); abline(0, 1)
   }
   title("Comparing 2 implementations of EGP3 rng", outer=TRUE)
-}) # Close test_that
 
-test_that("qegp3 behaves as expected", {
-  skip_on_cran()
-  skip_on_travis()
+
+  ## qegp3 behaves as expected
   # Note that regp3 calls on qegp3, so some implicit testing is performed by the
   # regp3 tests. Also, qegp3 calls on qgpd, so again some implicit testing is done
   # there.
@@ -85,7 +78,7 @@ test_that("qegp3 behaves as expected", {
   myTest <- function(sig, xi, kappa, thresh, msg){
     myq <- sapply(1:nreps,function(i) qegp3(x[,i], sig[i], xi[i], kappa[i], u=thresh[i]))
     myp <- sapply(1:nreps,function(i) pegp3(myq[,i], sig[i], xi[i], kappa[i], u=thresh[i]))
-    expect_that(x, equals(myp), label=paste(msg,"testusingqgpd"))
+    expect_equal(x, myp, label=paste(msg,"testusingqgpd"))
   }
 
   nreps <- 100
@@ -106,11 +99,9 @@ test_that("qegp3 behaves as expected", {
   p <- qegp3(0.95, kappa=0.5, sigma=1, xi=.01, lower.tail=FALSE)
   p2 <- qegp3(log(0.95), kappa=0.5, sigma=1, xi=.01, log.p=TRUE, lower.tail=FALSE)
   expect_equal(p, p2, label="qegp3 returns same answer on log and untransformed scale, upper tail")
-})
 
-test_that("pegp3 behaves as expected", {
-  skip_on_cran()
-  skip_on_travis()
+
+  ## pegp3 behaves as expected
   # pegp3 does some /fairly/ simple stuff and calls on pgpd, so the testing of
   # pgpd implicitly does some testing of pegp3. Also the test of qegp3 implicity
   # tests pegp3
@@ -131,11 +122,8 @@ test_that("pegp3 behaves as expected", {
     y <- 1 - exp(pegp3(p, sigma=s, xi=xi, kappa=k, lower.tail=FALSE, log.p=TRUE))
     expect_equal(x, y)
   }
-})
 
-test_that("degp3 behaves as expected", {
-  skip_on_cran()
-  skip_on_travis()
+  ## degp3 behaves as expected
   degp3_test <- function(x, kappa=1, sigma, xi){
     y <- 1 + x * xi/sigma
     res <- log(kappa/sigma) + (kappa - 1) * log(1 - y^(-1/xi)) - (1/xi + 1) * log(y)
@@ -155,7 +143,9 @@ test_that("degp3 behaves as expected", {
     # that degp3_test evaluates to +/- Inf
     d1 <- d2[d2 > 1e-20 & d2 < 1e20]
     d2 <- d2[d2 > 1e-20 & d2 < 1e20]
-    expect_that(d1, equals(d2, tol=1.0e-02))
+    expect_equal(d1, d2, tolerance=1.0e-02)
   }
-})
+}
+
+test_egp3()
 

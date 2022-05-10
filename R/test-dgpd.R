@@ -1,10 +1,5 @@
-context("dgpd")
-
-test_that("dgpd behaves as it should", {
-  skip_on_cran()
-  skip_on_travis()
-
-  evd.dgpd <- .evd.dgpd
+test_dgpd <- function(){
+  evd.dgpd <- texmex:::.evd.dgpd
 
   myTest <- function(sig, xi, thresh, label){
       myd <- sapply(1:nreps, function(i) dgpd(x[,i], sig[i], xi[i],u=thresh[i]))
@@ -58,4 +53,5 @@ test_that("dgpd behaves as it should", {
   ld <- dgpd(x,sig,xi,u=thresh,log.d=TRUE)
   expect_equal(myd, exp(ld), label="dgpd:logdensity")
 }
-)
+
+test_dgpd()

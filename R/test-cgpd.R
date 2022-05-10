@@ -1,9 +1,4 @@
-context("cgpd")
-
-test_that("cgpd family behaves as it ought", {
-  skip_on_cran()
-  skip_on_travis()
-
+test_cgpd <- function(){
   # We have extensive tests for gpd, so we really just need to be confident that
   # cgpd reproduces it quite closely and that the behaviour near -1/2 makes sense.
   tol <- .001
@@ -37,5 +32,6 @@ test_that("cgpd family behaves as it ought", {
   #pbcgm <- predict(bcgm, ci.fit=TRUE, M=seq(500, 1000, by=100))$obj
 
   # How to judge if results are within simulation error?
+}
 
-})
+test_cgpd()

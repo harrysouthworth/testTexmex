@@ -1,10 +1,4 @@
-context("chi")
-
-test_that("chi behaves as it should", {
-  skip_on_cran()
-  skip_on_travis()
-  # independent implementation of chi and chibar, Janet Heffernan personal code library
-
+test_chi <- function(){
   .ChiFunction <- function(data, nLevels){
     .Cfunction <- function(data, nLevels){
       rowWiseMax <- apply(data, 1, max)
@@ -80,4 +74,5 @@ test_that("chi behaves as it should", {
   expect_equal(chi.JH$ChiBarLower, chi$chibar[, 1], label="chi:ChiBarLower")
   expect_equal(chi.JH$ChiBarUpper, chi$chibar[, 3], label="chi:ChiBarUpper")
 }
-)
+
+test_chi()
