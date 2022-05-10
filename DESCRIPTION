@@ -1,0 +1,12 @@
+Package: testTexmex
+Title: Use the tinytest package to test functions in texmex
+Version: 0.1
+Authors@R: 
+    person("Harry", "Southworth", , "harry.southworth@gmail.com", role = c("aut", "cre"))
+Description: Use the tinytest package to test that the functions in the
+  texmex package do what they ought.
+License: GPL2
+Depends: texmex, tinytest
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
