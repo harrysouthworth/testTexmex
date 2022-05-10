@@ -1,9 +1,4 @@
-context("copula")
-
-test_that("copula behaves as it should", {
-  skip_on_cran()
-  skip_on_travis()
-
+test_copula <- function(){
     fun <- function(d) apply(d,2,function(x)(1:n)[rank(x)])/(1+n)
     n <- 200
 
@@ -15,22 +10,18 @@ test_that("copula behaves as it should", {
 
     expect_equal(d2, copula(u2)$copula, label="copula:2dimensional")
     expect_equal(d3, copula(u3)$copula, label="copula:3dimensional")
-})
 
-test_that("copula throws errors", {
-    expect_error(copula(TRUE), label="copula:exception")
-    expect_error(copula("text"), label="copula:exception")
-})
+    expect_error(copula(TRUE))
+    expect_error(copula("text"))
 
-test_that("copula fails for data frames without numerics", {
     dat <- data.frame(x=letters, stringsAsFactors=FALSE)
     expect_error(copula(dat))
-})
 
-test_that("copula warns if it drops variables", {
     dat <- data.frame(x=letters,
                       y=seq_along(letters),
                       stringsAsFactors=FALSE)
     expect_warning(copula(dat))
-})
+}
+
+test_copula()
 
