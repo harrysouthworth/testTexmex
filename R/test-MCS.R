@@ -1,53 +1,46 @@
-context("MCS")
+set.seed(20101111)
+myMCS <- function(x,p){
+  ## First and second args are
+  ## x (dxn matrix) and p (vector of probabilities).
 
-test_that("MCS behaves as it should", {
-  skip_on_cran()
-  skip_on_travis()
+  n <- dim(x)[2]
+  d <- dim(x)[1]
+  u <- t(apply(x,1,rank))/(n+1)# schmid and schmidt use n not n+1
 
-    set.seed(20101111)
-    myMCS <- function(x,p){
-        ## First and second args are
-        ## x (dxn matrix) and p (vector of probabilities).
+  rho <- numeric(length(p))
+  for(k in 1:length(p)) {
+    Diff <- p[k] - u
+    Diff[Diff<0] <- 0
+    Prod <- apply(Diff,2,prod)
 
-        n <- dim(x)[2]
-        d <- dim(x)[1]
-        u <- t(apply(x,1,rank))/(n+1)# schmid and schmidt use n not n+1
+    num <- mean(Prod) - ((p[k]^2)/2)^d
+    den <- (p[k]^(d+1)) / (d+1) - (0.5*p[k]^2)^d
+    rho[k] <- num/den
+  }
 
-        rho <- numeric(length(p))
-        for(k in 1:length(p)) {
-            Diff <- p[k] - u
-            Diff[Diff<0] <- 0
-            Prod <- apply(Diff,2,prod)
+  rho
+}
 
-            num <- mean(Prod) - ((p[k]^2)/2)^d
-            den <- (p[k]^(d+1)) / (d+1) - (0.5*p[k]^2)^d
-            rho[k] <- num/den
-        }
+## simulated data - dimension 2
+n <- 1000
+by <- 0.01
+p <- seq(by,1-by,by=by)
+data <- rbind(rnorm(n),rnorm(n))
 
-        rho
-    }
+tmRl <- MCS(t(data), p)
+myRl <- myMCS(data, tmRl$p)
 
-    ## simulated data - dimension 2
-    n <- 1000
-    by <- 0.01
-    p <- seq(by,1-by,by=by)
-    data <- rbind(rnorm(n),rnorm(n))
+expect_equal(myRl, tmRl$mcs, info="MCS:independentnormaldata")
+expect_equal(p, tmRl$p, info="MCS:mathchingpargument")
 
-    tmRl <- MCS(t(data), p)
-    myRl <- myMCS(data, tmRl$p)
+## winter air pollution data - dimension 5
+tmWinterMCS <- MCS(winter, p)
+myWinterMCS <- myMCS(t(winter), p)
+expect_equal(myWinterMCS, tmWinterMCS$mcs,
+             info="MCS:winterairpollutiondata")
 
-    expect_equal(myRl, tmRl$mcs, label="MCS:independentnormaldata")
-    expect_equal(p, tmRl$p, label="MCS:mathchingpargument")
-
-    ## winter air pollution data - dimension 5
-    tmWinterMCS <- MCS(winter, p)
-    myWinterMCS <- myMCS(t(winter), p)
-    expect_equal(myWinterMCS, tmWinterMCS$mcs,
-                 label="MCS:winterairpollutiondata")
-
-    ## summer airpollution data - dimension 5
-    tmSummerMCS <- MCS(summer, p)
-    mySummerMCS <- myMCS(t(summer), p)
-    expect_equal(mySummerMCS, tmSummerMCS$mcs,
-                 label="MCS:summerairpollutiondata")
-})
+## summer airpollution data - dimension 5
+tmSummerMCS <- MCS(summer, p)
+mySummerMCS <- myMCS(t(summer), p)
+expect_equal(mySummerMCS, tmSummerMCS$mcs,
+             info="MCS:summerairpollutiondata")

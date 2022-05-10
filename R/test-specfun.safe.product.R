@@ -1,44 +1,30 @@
-context("specfun.safe.product")
+prod <- .specfun.safe.product
 
-test_that("specfun.safe.product behaves as it should", {
-  skip_on_cran()
-  skip_on_travis()
+## simple values
+x <- runif(10, -5, 5)
+y <- runif(length(x), -5, 5)
 
-  prod <- .specfun.safe.product
+expect_equal(prod(x, y), pmax(x * y, -1),
+             label="safe product: simple values")
 
-  ## simple values
-  x <- runif(10, -5, 5)
-  y <- runif(length(x), -5, 5)
+## complicated values
+x <- c(0, 0, 1, 1)
+y <- c(Inf, -Inf, Inf, -Inf)
 
-  expect_equal(prod(x, y), pmax(x * y, -1),
-               label="safe product: simple values")
+res <- c(0, 0, Inf, -1)
+expect_equal(prod(x, y), res,
+             label="safe product: complicated values")
 
-  ## complicated values
-  x <- c(0, 0, 1, 1)
-  y <- c(Inf, -Inf, Inf, -Inf)
 
-  res <- c(0, 0, Inf, -1)
-  expect_equal(prod(x, y), res,
-               label="safe product: complicated values")
-}
-)
+set.seed(123456)
+x <- runif(10, -5, 5)
+y <- c(0.5)
 
-test_that("specfun.safe.product correctly recycles", {
-  skip_on_cran()
-    set.seed(123456)
-    x <- runif(10, -5, 5)
-    y <- c(0.5)
+expect_equal(.specfun.safe.product(x, y),
+             pmax(x * y, -1))
 
-    expect_equal(.specfun.safe.product(x, y),
-                 pmax(x * y, -1))
-})
+x <- 0.5
+y <- c(1,2,3,4)
 
-test_that("specfun.safe.product correctly recycles again", {
-  skip_on_cran()
-    x <- 0.5
-    y <- c(1,2,3,4)
-
-    expect_equal(.specfun.safe.product(x, y),
-                 pmax(x * y, -1))
-
-})
+expect_equal(.specfun.safe.product(x, y),
+             pmax(x * y, -1))
