@@ -1,0 +1,118 @@
+---
+title: "Running the texmex, margarita and lmr test suites"
+subtitle: "DRAFT"
+author: "Harry Southworth"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    css: /home/harry/MEGAsync/work/general/css/report.css
+    toc: true
+    toc_depth: 3
+    fig_caption: yes
+    fig_width: 7
+    fig_height: 5
+subparagraph: true
+always_allow_html: yes
+bibliography: /home/harry/MEGAsync/work/general/bibliography/bibliography.bib
+---
+
+```{r setup, include=FALSE}
+seed <- 20210727
+set.seed(seed)
+gitcv <- render::gitcv
+here <- here::here
+
+options(scipen = 10^6)
+knitr::opts_chunk$set(echo = TRUE)
+options(dplyr.summarise.inform = FALSE)
+
+library(texmex)
+library(margarita)
+library(lmr)
+library(tinytest)
+
+theFormat <- "html"
+```
+
+# {.tabset}
+<div class="watermark">DRAFT <span style='color:white; font-size:xx-small;'>`r gitcv()`</span></div>
+```{r, echo=FALSE, results = "asis"}
+printcv()
+```
+
+## Introduction
+The texmex [@texmex], margarita [@margarita] and lmr [@lmr] packages have
+testing suites that rely on
+the testthat package [@testthat]. The test suites don't currently run,
+apparently due to changes in testthat.
+
+Here, we run versions of the texmex test functions that depend not on testthat,
+but on tinytest [@tinytest].
+
+Output appears below, followed by a summary of the R session.
+
+The plots appear in the pdf file.
+
+## Results {.tabset}
+
+### texmex
+
+```{r, echo = TRUE}
+testFiles <- paste0("R/texmex/", list.files(here::here("R/texmex")))
+length(testFiles)
+```
+
+So there are `r length(testFiles)` test scripts. The whole thing fails if
+any tests are failed, so scroll to the bottom and see if all the scripts
+ran.
+
+```{r, echo = TRUE}
+pdf("texmex_plots.pdf")
+for (i in 1:length(testFiles)){
+  cat(paste0("\n############## ", i, " ", testFiles[i], " ##############\n"))
+  run_test_file(here(testFiles[i]))
+}
+dev.off()
+```
+
+### margarita
+
+```{r, echo = TRUE}
+testFiles <- paste0("R/margarita/", list.files(here::here("R/margarita")))
+length(testFiles)
+
+## Scroll to the bottom to see if all the test scripts ran.
+
+pdf("margarita_plots.pdf")
+for (i in 1:length(testFiles)){
+  cat(paste0("\n############## ", i, " ", testFiles[i], " ##############\n"))
+  run_test_file(here(testFiles[i]))
+}
+dev.off()
+```
+
+### lmr
+
+The lmr tests don't include any figures, so we don't need to open a pdf
+device here.
+
+```{r, echo = TRUE}
+testFiles <- paste0("R/lmr/", list.files(here("R/lmr")))
+length(testFiles)
+
+for (i in 1:length(testFiles)){
+  cat(paste0("\n############## ", i, " ", testFiles[i], " ##############\n"))
+  run_test_file(here(testFiles[i]))
+}
+```
+
+
+## Appendix
+
+### Information on the R session
+Information on the R session, in the interests of reproducibility.
+```{r sessioninfo, echo=FALSE}
+pander::pander(sessionInfo())
+```
+
+### References
