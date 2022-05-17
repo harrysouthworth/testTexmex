@@ -139,7 +139,7 @@ core.sanity.test <- function(xi) {
                info="qglo: shift and scale")
 } # Close core.sanity.test
 
-lapply(c(0, seq(-5, 5, length.out=10)), core.sanity.test)
+##lapply(c(0, seq(-5, 5, length.out=10)), core.sanity.test)
 
 ## known values
 expect_equal(0, qglo(0.5, 0, 1, 0),
@@ -229,7 +229,7 @@ core.sanity.test <- function(xi) {
   set.seed(seed)
   samples <- rglo(num.simple, 0, 1, xi)
   expect_equal(length(samples), num.simple,
-               "rglo: output of correct length")
+               info = "rglo: output of correct length")
   if (xi > 0) {
     expect_true(all(samples>=-1/xi), info = "rglo:lowerboundcheck")
   } else if (xi < 0) {
@@ -252,5 +252,5 @@ quantile.test <- function(xi) {
   ## this is a bit crude, but hey...
   expect_equal(test.quantiles, quantiles, tolerance=0.02, info="rglo: quantile test")
 } # Close quantile.test
-##lapply(xi.values, core.sanity.test)
-##lapply(xi.values, quantile.test)
+lapply(xi.values, core.sanity.test)
+lapply(xi.values, quantile.test)

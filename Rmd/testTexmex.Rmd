@@ -17,7 +17,7 @@ bibliography: /home/harry/MEGAsync/work/general/bibliography/bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
-seed <- 20210727
+seed <- 20220517
 set.seed(seed)
 gitcv <- render::gitcv
 here <- here::here
@@ -31,17 +31,21 @@ library(margarita)
 library(lmr)
 library(tinytest)
 
+source(here("R/run_test_file.R"))
+
 theFormat <- "html"
 ```
 
 # {.tabset}
-<div class="watermark">DRAFT <span style='color:white; font-size:xx-small;'>`r gitcv()`</span></div>
 ```{r, echo=FALSE, results = "asis"}
 printcv()
 ```
 
 ## Introduction
-The texmex [@texmex], margarita [@margarita] and lmr [@lmr] packages have
+The <a href="https://github.com/harrysouthworth/texmex">texmex</a> [@texmex],
+<a href="https://github.com/harrysouthworth/margarita">margarita</a> and
+<a href="https://github.com/harrysouthworth/lmr">lmr</a>
+packages have
 testing suites that rely on
 the testthat package [@testthat]. The test suites don't currently run,
 apparently due to changes in testthat.
@@ -57,27 +61,29 @@ The plots appear in the pdf file.
 
 ### texmex
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, message = FALSE}
 testFiles <- paste0("R/texmex/", list.files(here::here("R/texmex")))
 length(testFiles)
+tail(testFiles)
 ```
 
 So there are `r length(testFiles)` test scripts. The whole thing fails if
 any tests are failed, so scroll to the bottom and see if all the scripts
 ran.
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, message = FALSE}
 pdf("texmex_plots.pdf")
 for (i in 1:length(testFiles)){
   cat(paste0("\n############## ", i, " ", testFiles[i], " ##############\n"))
-  run_test_file(here(testFiles[i]))
+  o <- run_test_file(here(testFiles[i]), verbose = FALSE)
+  print(summary(o))
 }
 dev.off()
 ```
 
 ### margarita
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, message = FALSE}
 testFiles <- paste0("R/margarita/", list.files(here::here("R/margarita")))
 length(testFiles)
 
@@ -86,7 +92,8 @@ length(testFiles)
 pdf("margarita_plots.pdf")
 for (i in 1:length(testFiles)){
   cat(paste0("\n############## ", i, " ", testFiles[i], " ##############\n"))
-  run_test_file(here(testFiles[i]))
+  o <- run_test_file(here(testFiles[i]), verbose = FALSE)
+  print(summary(o))
 }
 dev.off()
 ```
@@ -102,7 +109,8 @@ length(testFiles)
 
 for (i in 1:length(testFiles)){
   cat(paste0("\n############## ", i, " ", testFiles[i], " ##############\n"))
-  run_test_file(here(testFiles[i]))
+  o <- run_test_file(here(testFiles[i]), verbose = FALSE)
+  print(summary(o))
 }
 ```
 

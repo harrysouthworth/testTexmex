@@ -1,4 +1,5 @@
 revTransform <- texmex:::revTransform
+mexTransform <- texmex:::mexTransform
 
 n <- 5000
 x <- cbind(rexp(n), rexp(n, 3))
