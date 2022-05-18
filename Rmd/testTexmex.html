@@ -193,7 +193,7 @@ pre code {
 <h1 class="title toc-ignore">Running the texmex, margarita and lmr test suites</h1>
 <h3 class="subtitle">DRAFT</h3>
 <h4 class="author">Harry Southworth</h4>
-<h4 class="date">11 May, 2022</h4>
+<h4 class="date">17 May, 2022</h4>
 
 </div>
 
@@ -201,14 +201,11 @@ pre code {
 <div id="section" class="section level1 tabset">
 <h1 class="tabset"></h1>
 <div class="watermark">
-DRAFT <span style="color:white; font-size:xx-small;">83ef78e</span>
-</div>
-<div class="watermark">
-DRAFT <span style="color:white; font-size:xx-small;">83ef78e</span>
+DRAFT <span style="color:white; font-size:xx-small;">a5cec6a</span>
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>The texmex <span class="citation">(Southworth, Heffernan, and Metcalfe 2017)</span>, margarita <span class="citation">(<strong>margarita?</strong>)</span> and lmr <span class="citation">(<strong>lmr?</strong>)</span> packages have testing suites that rely on the testthat package <span class="citation">(Wickham 2011)</span>. The test suites don’t currently run, apparently due to changes in testthat.</p>
+<p>The <a href="https://github.com/harrysouthworth/texmex">texmex</a> <span class="citation">(Southworth, Heffernan, and Metcalfe 2017)</span>, <a href="https://github.com/harrysouthworth/margarita">margarita</a> and <a href="https://github.com/harrysouthworth/lmr">lmr</a> packages have testing suites that rely on the testthat package <span class="citation">(Wickham 2011)</span>. The test suites don’t currently run, apparently due to changes in testthat.</p>
 <p>Here, we run versions of the texmex test functions that depend not on testthat, but on tinytest <span class="citation">(<strong>tinytest?</strong>)</span>.</p>
 <p>Output appears below, followed by a summary of the R session.</p>
 <p>The plots appear in the pdf file.</p>
@@ -220,1930 +217,330 @@ DRAFT <span style="color:white; font-size:xx-small;">83ef78e</span>
 <pre class="r"><code>testFiles &lt;- paste0(&quot;R/texmex/&quot;, list.files(here::here(&quot;R/texmex&quot;)))
 length(testFiles)</code></pre>
 <pre><code>## [1] 52</code></pre>
+<pre class="r"><code>tail(testFiles)</code></pre>
+<pre><code>## [1] &quot;R/texmex/test-rgpd.R&quot;                 &quot;R/texmex/test-simulate.R&quot;            
+## [3] &quot;R/texmex/test-specfun.safe.product.R&quot; &quot;R/texmex/test-thinAndBurn.evmSim.R&quot;  
+## [5] &quot;R/texmex/test-WAIC.R&quot;                 &quot;R/texmex/test-weibull.R&quot;</code></pre>
 <p>So there are 52 test scripts. The whole thing fails if any tests are failed, so scroll to the bottom and see if all the scripts ran.</p>
 <pre class="r"><code>pdf(&quot;texmex_plots.pdf&quot;)
 for (i in 1:length(testFiles)){
   cat(paste0(&quot;\n############## &quot;, i, &quot; &quot;, testFiles[i], &quot; ##############\n&quot;))
-  run_test_file(here(testFiles[i]))
+  o &lt;- run_test_file(here(testFiles[i]), verbose = FALSE)
+  print(summary(o))
 }</code></pre>
 <pre><code>## 
 ## ############## 1 R/texmex/test-bootmex.R ##############
-## 
-test-bootmex.R................    0 tests    
-test-bootmex.R................    0 tests    
-test-bootmex.R................    0 tests    
-test-bootmex.R................    0 tests    
-test-bootmex.R................    0 tests    
-test-bootmex.R................    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-bootmex.R................    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-bootmex.R................    0 tests    
-test-bootmex.R................    1 tests [0;32mOK[0m 
-test-bootmex.R................    2 tests [0;32mOK[0m 
-test-bootmex.R................    3 tests [0;32mOK[0m 
-test-bootmex.R................    4 tests [0;32mOK[0m 
-test-bootmex.R................    5 tests [0;32mOK[0m 
-test-bootmex.R................    6 tests [0;32mOK[0m 
-test-bootmex.R................    7 tests [0;32mOK[0m 
-test-bootmex.R................    8 tests [0;32mOK[0m 
-test-bootmex.R................    9 tests [0;32mOK[0m 
-test-bootmex.R................   10 tests [0;32mOK[0m 
-test-bootmex.R................   11 tests [0;32mOK[0m 
-test-bootmex.R................   12 tests [0;32mOK[0m 
-test-bootmex.R................   12 tests [0;32mOK[0m 
-test-bootmex.R................   12 tests [0;32mOK[0m</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-bootmex.R................   12 tests [0;32mOK[0m</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-bootmex.R................   12 tests [0;32mOK[0m 
-test-bootmex.R................   13 tests [0;32mOK[0m 
-test-bootmex.R................   14 tests [0;32mOK[0m 
-test-bootmex.R................   15 tests [0;32mOK[0m 
-test-bootmex.R................   16 tests [0;32mOK[0m 
-test-bootmex.R................   17 tests [0;32mOK[0m 
-test-bootmex.R................   18 tests [0;32mOK[0m 
-test-bootmex.R................   19 tests [0;32mOK[0m 
-test-bootmex.R................   20 tests [0;32mOK[0m 
-test-bootmex.R................   20 tests [0;32mOK[0m 
-test-bootmex.R................   20 tests [0;32mOK[0m</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-bootmex.R................   20 tests [0;32mOK[0m</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-bootmex.R................   20 tests [0;32mOK[0m 
-test-bootmex.R................   21 tests [0;32mOK[0m 
-test-bootmex.R................   22 tests [0;32mOK[0m 
-test-bootmex.R................   23 tests [0;32mOK[0m 
-test-bootmex.R................   24 tests [0;32mOK[0m 
-test-bootmex.R................   24 tests [0;32mOK[0m 
-test-bootmex.R................   24 tests [0;32mOK[0m 
-test-bootmex.R................   24 tests [0;32mOK[0m 
-test-bootmex.R................   24 tests [0;32mOK[0m 
-test-bootmex.R................   25 tests [0;32mOK[0m 
-test-bootmex.R................   26 tests [0;32mOK[0m 
-test-bootmex.R................   27 tests [0;32mOK[0m [0;34m9.2s[0m
+##                 
+## File             Results fails passes
+##   test-bootmex.R      27     0     27
+##   Total               27     0     27
 ## 
 ## ############## 2 R/texmex/test-cgpd.R ##############
-## 
-test-cgpd.R...................    0 tests    
-test-cgpd.R...................    0 tests    
-test-cgpd.R...................    0 tests    
-test-cgpd.R...................    1 tests [0;32mOK[0m 
-test-cgpd.R...................    2 tests [0;32mOK[0m 
-test-cgpd.R...................    3 tests [0;32mOK[0m 
-test-cgpd.R...................    3 tests [0;32mOK[0m 
-test-cgpd.R...................    3 tests [0;32mOK[0m 
-test-cgpd.R...................    3 tests [0;32mOK[0m 
-test-cgpd.R...................    3 tests [0;32mOK[0m [0;36m9ms[0m
+##              
+## File          Results fails passes
+##   test-cgpd.R       3     0      3
+##   Total             3     0      3
 ## 
 ## ############## 3 R/texmex/test-chi.R ##############
-## 
-test-chi.R....................    0 tests    
-test-chi.R....................    0 tests    
-test-chi.R....................    0 tests    
-test-chi.R....................    0 tests    
-test-chi.R....................    1 tests [0;32mOK[0m 
-test-chi.R....................    2 tests [0;32mOK[0m 
-test-chi.R....................    3 tests [0;32mOK[0m 
-test-chi.R....................    4 tests [0;32mOK[0m 
-test-chi.R....................    5 tests [0;32mOK[0m 
-test-chi.R....................    6 tests [0;32mOK[0m 
-test-chi.R....................    7 tests [0;32mOK[0m [0;36m70ms[0m
+##             
+## File         Results fails passes
+##   test-chi.R       7     0      7
+##   Total            7     0      7
 ## 
 ## ############## 4 R/texmex/test-closures.R ##############
-## 
-test-closures.R...............    0 tests    
-test-closures.R...............    0 tests    
-test-closures.R...............    0 tests    
-test-closures.R...............  200 tests [0;32mOK[0m [0;36m78ms[0m
+##                  
+## File              Results fails passes
+##   test-closures.R     200     0    200
+##   Total               200     0    200
 ## 
 ## ############## 5 R/texmex/test-copula.R ##############
-## 
-test-copula.R.................    0 tests    
-test-copula.R.................    0 tests    
-test-copula.R.................    0 tests    
-test-copula.R.................    0 tests    
-test-copula.R.................    0 tests    
-test-copula.R.................    0 tests    
-test-copula.R.................    1 tests [0;32mOK[0m 
-test-copula.R.................    2 tests [0;32mOK[0m 
-test-copula.R.................    3 tests [0;32mOK[0m 
-test-copula.R.................    4 tests [0;32mOK[0m 
-test-copula.R.................    4 tests [0;32mOK[0m 
-test-copula.R.................    5 tests [0;32mOK[0m 
-test-copula.R.................    5 tests [0;32mOK[0m 
-test-copula.R.................    6 tests [0;32mOK[0m [0;36m3ms[0m
+##                
+## File            Results fails passes
+##   test-copula.R       6     0      6
+##   Total               6     0      6
 ## 
 ## ############## 6 R/texmex/test-cv.R ##############
-## 
-test-cv.R.....................    0 tests    
-test-cv.R.....................    0 tests    
-test-cv.R.....................    0 tests    
-test-cv.R.....................    0 tests    
-test-cv.R.....................    0 tests    
-test-cv.R.....................    1 tests [0;32mOK[0m 
-test-cv.R.....................    1 tests [0;32mOK[0m 
-test-cv.R.....................    1 tests [0;32mOK[0m 
-test-cv.R.....................    2 tests [0;32mOK[0m 
-test-cv.R.....................    2 tests [0;32mOK[0m 
-test-cv.R.....................    2 tests [0;32mOK[0m 
-test-cv.R.....................    2 tests [0;32mOK[0m 
-test-cv.R.....................    3 tests [0;32mOK[0m 
-test-cv.R.....................    3 tests [0;32mOK[0m 
-test-cv.R.....................    3 tests [0;32mOK[0m 
-test-cv.R.....................    4 tests [0;32mOK[0m [0;34m29.3s[0m
+##            
+## File        Results fails passes
+##   test-cv.R       4     0      4
+##   Total           4     0      4
 ## 
 ## ############## 7 R/texmex/test-dgpd.R ##############
+##              
+## File          Results fails passes
+##   test-dgpd.R       5     0      5
+##   Total             5     0      5
 ## 
-test-dgpd.R...................    0 tests    
-test-dgpd.R...................    0 tests    
-test-dgpd.R...................    0 tests    
-test-dgpd.R...................    0 tests    
-test-dgpd.R...................    0 tests    
-test-dgpd.R...................    0 tests    
-test-dgpd.R...................    0 tests    
-test-dgpd.R...................    0 tests    
-test-dgpd.R...................    0 tests    
-test-dgpd.R...................    1 tests [0;32mOK[0m 
-test-dgpd.R...................    1 tests [0;32mOK[0m 
-test-dgpd.R...................    1 tests [0;32mOK[0m 
-test-dgpd.R...................    2 tests [0;32mOK[0m 
-test-dgpd.R...................    2 tests [0;32mOK[0m 
-test-dgpd.R...................    2 tests [0;32mOK[0m 
-test-dgpd.R...................    3 tests [0;32mOK[0m 
-test-dgpd.R...................    3 tests [0;32mOK[0m 
-test-dgpd.R...................    3 tests [0;32mOK[0m 
-test-dgpd.R...................    3 tests [0;32mOK[0m 
-test-dgpd.R...................    3 tests [0;32mOK[0m 
-test-dgpd.R...................    3 tests [0;32mOK[0m 
-test-dgpd.R...................    3 tests [0;32mOK[0m 
-test-dgpd.R...................    4 tests [0;32mOK[0m 
-test-dgpd.R...................    4 tests [0;32mOK[0m 
-test-dgpd.R...................    5 tests [0;32mOK[0m [0;36m70ms[0m
+## ############## 8 R/texmex/test-egp3.R ##############</code></pre>
+<pre><code>##              
+## File          Results fails passes
+##   test-egp3.R      48     0     48
+##   Total            48     0     48
 ## 
-## ############## 8 R/texmex/test-egp3.R ##############
-## 
-test-egp3.R...................    0 tests    
-test-egp3.R...................    0 tests    
-test-egp3.R...................    0 tests    
-test-egp3.R...................    0 tests    
-test-egp3.R...................    0 tests    
-test-egp3.R...................    0 tests    
-test-egp3.R...................    0 tests    
-test-egp3.R...................    1 tests [0;32mOK[0m 
-test-egp3.R...................    1 tests [0;32mOK[0m 
-test-egp3.R...................    1 tests [0;32mOK[0m 
-test-egp3.R...................    2 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-egp3.R...................    2 tests [0;32mOK[0m 
-test-egp3.R...................    2 tests [0;32mOK[0m 
-test-egp3.R...................    2 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-egp3.R...................   11 tests [0;32mOK[0m 
-test-egp3.R...................   11 tests [0;32mOK[0m 
-test-egp3.R...................   12 tests [0;32mOK[0m 
-test-egp3.R...................   13 tests [0;32mOK[0m 
-test-egp3.R...................   14 tests [0;32mOK[0m 
-test-egp3.R...................   15 tests [0;32mOK[0m 
-test-egp3.R...................   15 tests [0;32mOK[0m 
-test-egp3.R...................   15 tests [0;32mOK[0m 
-test-egp3.R...................   15 tests [0;32mOK[0m 
-test-egp3.R...................   15 tests [0;32mOK[0m 
-test-egp3.R...................   15 tests [0;32mOK[0m 
-test-egp3.R...................   15 tests [0;32mOK[0m 
-test-egp3.R...................   15 tests [0;32mOK[0m 
-test-egp3.R...................   15 tests [0;32mOK[0m 
-test-egp3.R...................   16 tests [0;32mOK[0m 
-test-egp3.R...................   16 tests [0;32mOK[0m 
-test-egp3.R...................   16 tests [0;32mOK[0m 
-test-egp3.R...................   17 tests [0;32mOK[0m 
-test-egp3.R...................   17 tests [0;32mOK[0m 
-test-egp3.R...................   17 tests [0;32mOK[0m 
-test-egp3.R...................   18 tests [0;32mOK[0m 
-test-egp3.R...................   38 tests [0;32mOK[0m 
-test-egp3.R...................   38 tests [0;32mOK[0m 
-test-egp3.R...................   48 tests [0;32mOK[0m [0;34m0.7s[0m
-## 
-## ############## 9 R/texmex/test-endPoint.R ##############</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-endPoint.R...............   30 tests [0;32mOK[0m [0;34m10.8s[0m
+## ############## 9 R/texmex/test-endPoint.R ##############
+##                  
+## File              Results fails passes
+##   test-endPoint.R      30     0     30
+##   Total                30     0     30
 ## 
 ## ############## 10 R/texmex/test-evm.R ##############
-## 
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    0 tests    
-test-evm.R....................    1 tests [0;32mOK[0m 
-test-evm.R....................    2 tests [0;32mOK[0m 
-test-evm.R....................    3 tests [0;32mOK[0m 
-test-evm.R....................    4 tests [0;32mOK[0m 
-test-evm.R....................    4 tests [0;32mOK[0m 
-test-evm.R....................    4 tests [0;32mOK[0m 
-test-evm.R....................    4 tests [0;32mOK[0m 
-test-evm.R....................    4 tests [0;32mOK[0m 
-test-evm.R....................    5 tests [0;32mOK[0m 
-test-evm.R....................    6 tests [0;32mOK[0m 
-test-evm.R....................    6 tests [0;32mOK[0m 
-test-evm.R....................    6 tests [0;32mOK[0m 
-test-evm.R....................    6 tests [0;32mOK[0m 
-test-evm.R....................    6 tests [0;32mOK[0m 
-test-evm.R....................    7 tests [0;32mOK[0m 
-test-evm.R....................    8 tests [0;32mOK[0m 
-test-evm.R....................    8 tests [0;32mOK[0m 
-test-evm.R....................    8 tests [0;32mOK[0m 
-test-evm.R....................    8 tests [0;32mOK[0m 
-test-evm.R....................    8 tests [0;32mOK[0m 
-test-evm.R....................    9 tests [0;32mOK[0m 
-test-evm.R....................   10 tests [0;32mOK[0m 
-test-evm.R....................   10 tests [0;32mOK[0m 
-test-evm.R....................   10 tests [0;32mOK[0m 
-test-evm.R....................   10 tests [0;32mOK[0m 
-test-evm.R....................   10 tests [0;32mOK[0m 
-test-evm.R....................   11 tests [0;32mOK[0m 
-test-evm.R....................   12 tests [0;32mOK[0m 
-test-evm.R....................   12 tests [0;32mOK[0m 
-test-evm.R....................   12 tests [0;32mOK[0m 
-test-evm.R....................   12 tests [0;32mOK[0m 
-test-evm.R....................   12 tests [0;32mOK[0m 
-test-evm.R....................   13 tests [0;32mOK[0m 
-test-evm.R....................   14 tests [0;32mOK[0m 
-test-evm.R....................   14 tests [0;32mOK[0m 
-test-evm.R....................   14 tests [0;32mOK[0m 
-test-evm.R....................   14 tests [0;32mOK[0m 
-test-evm.R....................   14 tests [0;32mOK[0m 
-test-evm.R....................   15 tests [0;32mOK[0m 
-test-evm.R....................   16 tests [0;32mOK[0m 
-test-evm.R....................   16 tests [0;32mOK[0m 
-test-evm.R....................   16 tests [0;32mOK[0m 
-test-evm.R....................   16 tests [0;32mOK[0m 
-test-evm.R....................   16 tests [0;32mOK[0m 
-test-evm.R....................   17 tests [0;32mOK[0m 
-test-evm.R....................   18 tests [0;32mOK[0m 
-test-evm.R....................   18 tests [0;32mOK[0m 
-test-evm.R....................   18 tests [0;32mOK[0m 
-test-evm.R....................   18 tests [0;32mOK[0m 
-test-evm.R....................   18 tests [0;32mOK[0m 
-test-evm.R....................   19 tests [0;32mOK[0m 
-test-evm.R....................   20 tests [0;32mOK[0m 
-test-evm.R....................   20 tests [0;32mOK[0m 
-test-evm.R....................   20 tests [0;32mOK[0m 
-test-evm.R....................   20 tests [0;32mOK[0m 
-test-evm.R....................   21 tests [0;32mOK[0m 
-test-evm.R....................   21 tests [0;32mOK[0m 
-test-evm.R....................   21 tests [0;32mOK[0m 
-test-evm.R....................   21 tests [0;32mOK[0m 
-test-evm.R....................   21 tests [0;32mOK[0m 
-test-evm.R....................   22 tests [0;32mOK[0m 
-test-evm.R....................   23 tests [0;32mOK[0m 
-test-evm.R....................   23 tests [0;32mOK[0m 
-test-evm.R....................   23 tests [0;32mOK[0m 
-test-evm.R....................   23 tests [0;32mOK[0m 
-test-evm.R....................   23 tests [0;32mOK[0m 
-test-evm.R....................   23 tests [0;32mOK[0m 
-test-evm.R....................   24 tests [0;32mOK[0m 
-test-evm.R....................   25 tests [0;32mOK[0m 
-test-evm.R....................   25 tests [0;32mOK[0m 
-test-evm.R....................   25 tests [0;32mOK[0m 
-test-evm.R....................   25 tests [0;32mOK[0m 
-test-evm.R....................   25 tests [0;32mOK[0m 
-test-evm.R....................   25 tests [0;32mOK[0m 
-test-evm.R....................   25 tests [0;32mOK[0m 
-test-evm.R....................   25 tests [0;32mOK[0m 
-test-evm.R....................   25 tests [0;32mOK[0m 
-test-evm.R....................   26 tests [0;32mOK[0m 
-test-evm.R....................   27 tests [0;32mOK[0m 
-test-evm.R....................   27 tests [0;32mOK[0m 
-test-evm.R....................   27 tests [0;32mOK[0m 
-test-evm.R....................   27 tests [0;32mOK[0m 
-test-evm.R....................   27 tests [0;32mOK[0m 
-test-evm.R....................   27 tests [0;32mOK[0m 
-test-evm.R....................   27 tests [0;32mOK[0m 
-test-evm.R....................   27 tests [0;32mOK[0m 
-test-evm.R....................   28 tests [0;32mOK[0m 
-test-evm.R....................   29 tests [0;32mOK[0m 
-test-evm.R....................   29 tests [0;32mOK[0m 
-test-evm.R....................   29 tests [0;32mOK[0m 
-test-evm.R....................   29 tests [0;32mOK[0m 
-test-evm.R....................   29 tests [0;32mOK[0m 
-test-evm.R....................   29 tests [0;32mOK[0m 
-test-evm.R....................   29 tests [0;32mOK[0m 
-test-evm.R....................   29 tests [0;32mOK[0m 
-test-evm.R....................   29 tests [0;32mOK[0m 
-test-evm.R....................   30 tests [0;32mOK[0m 
-test-evm.R....................   31 tests [0;32mOK[0m 
-test-evm.R....................   31 tests [0;32mOK[0m 
-test-evm.R....................   31 tests [0;32mOK[0m 
-test-evm.R....................   31 tests [0;32mOK[0m 
-test-evm.R....................   31 tests [0;32mOK[0m</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-evm.R....................   31 tests [0;32mOK[0m</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-evm.R....................   31 tests [0;32mOK[0m</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-evm.R....................   31 tests [0;32mOK[0m 
-test-evm.R....................   32 tests [0;32mOK[0m 
-test-evm.R....................   33 tests [0;32mOK[0m 
-test-evm.R....................   33 tests [0;32mOK[0m 
-test-evm.R....................   33 tests [0;32mOK[0m 
-test-evm.R....................   33 tests [0;32mOK[0m 
-test-evm.R....................   33 tests [0;32mOK[0m 
-test-evm.R....................   33 tests [0;32mOK[0m 
-test-evm.R....................   33 tests [0;32mOK[0m 
-test-evm.R....................   33 tests [0;32mOK[0m 
-test-evm.R....................   33 tests [0;32mOK[0m 
-test-evm.R....................   34 tests [0;32mOK[0m 
-test-evm.R....................   35 tests [0;32mOK[0m 
-test-evm.R....................   35 tests [0;32mOK[0m 
-test-evm.R....................   35 tests [0;32mOK[0m 
-test-evm.R....................   35 tests [0;32mOK[0m 
-test-evm.R....................   35 tests [0;32mOK[0m 
-test-evm.R....................   35 tests [0;32mOK[0m 
-test-evm.R....................   36 tests [0;32mOK[0m 
-test-evm.R....................   36 tests [0;32mOK[0m 
-test-evm.R....................   37 tests [0;32mOK[0m 
-test-evm.R....................   37 tests [0;32mOK[0m 
-test-evm.R....................   37 tests [0;32mOK[0m 
-test-evm.R....................   37 tests [0;32mOK[0m 
-test-evm.R....................   38 tests [0;32mOK[0m 
-test-evm.R....................   38 tests [0;32mOK[0m 
-test-evm.R....................   38 tests [0;32mOK[0m 
-test-evm.R....................   38 tests [0;32mOK[0m 
-test-evm.R....................   39 tests [0;32mOK[0m 
-test-evm.R....................   39 tests [0;32mOK[0m 
-test-evm.R....................   39 tests [0;32mOK[0m 
-test-evm.R....................   39 tests [0;32mOK[0m 
-test-evm.R....................   40 tests [0;32mOK[0m 
-test-evm.R....................   40 tests [0;32mOK[0m 
-test-evm.R....................   40 tests [0;32mOK[0m 
-test-evm.R....................   40 tests [0;32mOK[0m 
-test-evm.R....................   40 tests [0;32mOK[0m 
-test-evm.R....................   40 tests [0;32mOK[0m 
-test-evm.R....................   40 tests [0;32mOK[0m 
-test-evm.R....................   40 tests [0;32mOK[0m 
-test-evm.R....................   41 tests [0;32mOK[0m 
-test-evm.R....................   42 tests [0;32mOK[0m 
-test-evm.R....................   42 tests [0;32mOK[0m 
-test-evm.R....................   42 tests [0;32mOK[0m 
-test-evm.R....................   42 tests [0;32mOK[0m 
-test-evm.R....................   43 tests [0;32mOK[0m 
-test-evm.R....................   44 tests [0;32mOK[0m 
-test-evm.R....................   44 tests [0;32mOK[0m 
-test-evm.R....................   44 tests [0;32mOK[0m 
-test-evm.R....................   45 tests [0;32mOK[0m 
-test-evm.R....................   46 tests [0;32mOK[0m 
-test-evm.R....................   46 tests [0;32mOK[0m 
-test-evm.R....................   46 tests [0;32mOK[0m 
-test-evm.R....................   47 tests [0;32mOK[0m 
-test-evm.R....................   47 tests [0;32mOK[0m 
-test-evm.R....................   47 tests [0;32mOK[0m 
-test-evm.R....................   47 tests [0;32mOK[0m 
-test-evm.R....................   47 tests [0;32mOK[0m 
-test-evm.R....................   48 tests [0;32mOK[0m 
-test-evm.R....................   49 tests [0;32mOK[0m 
-test-evm.R....................   50 tests [0;32mOK[0m 
-test-evm.R....................   50 tests [0;32mOK[0m 
-test-evm.R....................   50 tests [0;32mOK[0m 
-test-evm.R....................   50 tests [0;32mOK[0m 
-test-evm.R....................   50 tests [0;32mOK[0m 
-test-evm.R....................   51 tests [0;32mOK[0m 
-test-evm.R....................   52 tests [0;32mOK[0m 
-test-evm.R....................   53 tests [0;32mOK[0m 
-test-evm.R....................   53 tests [0;32mOK[0m 
-test-evm.R....................   53 tests [0;32mOK[0m 
-test-evm.R....................   53 tests [0;32mOK[0m 
-test-evm.R....................   53 tests [0;32mOK[0m 
-test-evm.R....................   54 tests [0;32mOK[0m 
-test-evm.R....................   55 tests [0;32mOK[0m 
-test-evm.R....................   56 tests [0;32mOK[0m 
-test-evm.R....................   56 tests [0;32mOK[0m 
-test-evm.R....................   56 tests [0;32mOK[0m 
-test-evm.R....................   56 tests [0;32mOK[0m 
-test-evm.R....................   56 tests [0;32mOK[0m 
-test-evm.R....................   57 tests [0;32mOK[0m 
-test-evm.R....................   58 tests [0;32mOK[0m 
-test-evm.R....................   58 tests [0;32mOK[0m 
-test-evm.R....................   58 tests [0;32mOK[0m 
-test-evm.R....................   59 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   60 tests [0;32mOK[0m 
-test-evm.R....................   61 tests [0;32mOK[0m 
-test-evm.R....................   62 tests [0;32mOK[0m 
-test-evm.R....................   63 tests [0;32mOK[0m 
-test-evm.R....................   64 tests [0;32mOK[0m 
-test-evm.R....................   65 tests [0;32mOK[0m 
-test-evm.R....................   66 tests [0;32mOK[0m 
-test-evm.R....................   67 tests [0;32mOK[0m 
-test-evm.R....................   68 tests [0;32mOK[0m 
-test-evm.R....................   69 tests [0;32mOK[0m 
-test-evm.R....................   69 tests [0;32mOK[0m 
-test-evm.R....................   69 tests [0;32mOK[0m 
-test-evm.R....................   69 tests [0;32mOK[0m 
-test-evm.R....................   69 tests [0;32mOK[0m 
-test-evm.R....................   69 tests [0;32mOK[0m 
-test-evm.R....................   69 tests [0;32mOK[0m 
-test-evm.R....................   69 tests [0;32mOK[0m 
-test-evm.R....................   70 tests [0;32mOK[0m 
-test-evm.R....................   71 tests [0;32mOK[0m 
-test-evm.R....................   71 tests [0;32mOK[0m 
-test-evm.R....................   71 tests [0;32mOK[0m 
-test-evm.R....................   71 tests [0;32mOK[0m 
-test-evm.R....................   71 tests [0;32mOK[0m 
-test-evm.R....................   71 tests [0;32mOK[0m 
-test-evm.R....................   71 tests [0;32mOK[0m 
-test-evm.R....................   71 tests [0;32mOK[0m 
-test-evm.R....................   71 tests [0;32mOK[0m 
-test-evm.R....................   72 tests [0;32mOK[0m 
-test-evm.R....................   73 tests [0;32mOK[0m 
-test-evm.R....................   73 tests [0;32mOK[0m 
-test-evm.R....................   73 tests [0;32mOK[0m 
-test-evm.R....................   73 tests [0;32mOK[0m 
-test-evm.R....................   73 tests [0;32mOK[0m 
-test-evm.R....................   73 tests [0;32mOK[0m 
-test-evm.R....................   73 tests [0;32mOK[0m 
-test-evm.R....................   73 tests [0;32mOK[0m 
-test-evm.R....................   73 tests [0;32mOK[0m 
-test-evm.R....................   74 tests [0;32mOK[0m 
-test-evm.R....................   75 tests [0;32mOK[0m 
-test-evm.R....................   75 tests [0;32mOK[0m 
-test-evm.R....................   75 tests [0;32mOK[0m 
-test-evm.R....................   75 tests [0;32mOK[0m 
-test-evm.R....................   75 tests [0;32mOK[0m 
-test-evm.R....................   75 tests [0;32mOK[0m 
-test-evm.R....................   75 tests [0;32mOK[0m 
-test-evm.R....................   75 tests [0;32mOK[0m 
-test-evm.R....................   76 tests [0;32mOK[0m 
-test-evm.R....................   77 tests [0;32mOK[0m 
-test-evm.R....................   77 tests [0;32mOK[0m 
-test-evm.R....................   77 tests [0;32mOK[0m 
-test-evm.R....................   77 tests [0;32mOK[0m 
-test-evm.R....................   77 tests [0;32mOK[0m 
-test-evm.R....................   77 tests [0;32mOK[0m 
-test-evm.R....................   77 tests [0;32mOK[0m 
-test-evm.R....................   77 tests [0;32mOK[0m 
-test-evm.R....................   77 tests [0;32mOK[0m 
-test-evm.R....................   78 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   79 tests [0;32mOK[0m 
-test-evm.R....................   80 tests [0;32mOK[0m 
-test-evm.R....................   81 tests [0;32mOK[0m 
-test-evm.R....................   81 tests [0;32mOK[0m 
-test-evm.R....................   81 tests [0;32mOK[0m 
-test-evm.R....................   81 tests [0;32mOK[0m</code></pre>
-<pre><code>## 10000 steps taken</code></pre>
-<pre><code>## 20000 steps taken</code></pre>
-<pre><code>## 30000 steps taken</code></pre>
-<pre><code>## 40000 steps taken</code></pre>
-<pre><code>## Acceptance rate:0.318</code></pre>
-<pre><code>## 10000 steps taken</code></pre>
-<pre><code>## 20000 steps taken</code></pre>
-<pre><code>## 30000 steps taken</code></pre>
-<pre><code>## 40000 steps taken</code></pre>
-<pre><code>## Acceptance rate:0.318</code></pre>
-<pre><code>## 
-test-evm.R....................   87 tests [0;32mOK[0m [0;34m11.8s[0m
+##             
+## File         Results fails passes
+##   test-evm.R      87     0     87
+##   Total           87     0     87
 ## 
 ## ############## 11 R/texmex/test-evmBoot.R ##############
-## 
-test-evmBoot.R................    0 tests    
-test-evmBoot.R................    0 tests</code></pre>
-<pre><code>## Ratio of bias to standard error is high</code></pre>
-<pre><code>## Ratio of bias to standard error is high
-## Ratio of bias to standard error is high
-## Ratio of bias to standard error is high</code></pre>
-<pre><code>## 
-test-evmBoot.R................   14 tests [0;32mOK[0m [0;34m34.6s[0m
+##                 
+## File             Results fails passes
+##   test-evmBoot.R      14     0     14
+##   Total               14     0     14
 ## 
 ## ############## 12 R/texmex/test-exprel.R ##############
-## 
-test-exprel.R.................    0 tests    
-test-exprel.R.................    0 tests    
-test-exprel.R.................    0 tests    
-test-exprel.R.................    0 tests    
-test-exprel.R.................    1 tests [0;32mOK[0m 
-test-exprel.R.................    1 tests [0;32mOK[0m 
-test-exprel.R.................    1 tests [0;32mOK[0m 
-test-exprel.R.................    1 tests [0;32mOK[0m 
-test-exprel.R.................    2 tests [0;32mOK[0m 
-test-exprel.R.................    3 tests [0;32mOK[0m [0;36m3ms[0m
+##                
+## File            Results fails passes
+##   test-exprel.R       3     0      3
+##   Total               3     0      3
 ## 
 ## ############## 13 R/texmex/test-extremalIndex.R ##############
-## 
-test-extremalIndex.R..........    0 tests    
-test-extremalIndex.R..........    0 tests    
-test-extremalIndex.R..........   40 tests [0;32mOK[0m 
-test-extremalIndex.R..........   40 tests [0;32mOK[0m 
-test-extremalIndex.R..........   40 tests [0;32mOK[0m 
-test-extremalIndex.R..........   40 tests [0;32mOK[0m 
-test-extremalIndex.R..........   40 tests [0;32mOK[0m 
-test-extremalIndex.R..........   40 tests [0;32mOK[0m 
-test-extremalIndex.R..........   40 tests [0;32mOK[0m 
-test-extremalIndex.R..........   40 tests [0;32mOK[0m 
-test-extremalIndex.R..........   41 tests [0;32mOK[0m 
-test-extremalIndex.R..........   42 tests [0;32mOK[0m 
-test-extremalIndex.R..........   42 tests [0;32mOK[0m 
-test-extremalIndex.R..........   42 tests [0;32mOK[0m 
-test-extremalIndex.R..........   42 tests [0;32mOK[0m 
-test-extremalIndex.R..........   43 tests [0;32mOK[0m 
-test-extremalIndex.R..........   44 tests [0;32mOK[0m 
-test-extremalIndex.R..........   45 tests [0;32mOK[0m 
-test-extremalIndex.R..........   46 tests [0;32mOK[0m 
-test-extremalIndex.R..........   47 tests [0;32mOK[0m 
-test-extremalIndex.R..........   48 tests [0;32mOK[0m 
-test-extremalIndex.R..........   49 tests [0;32mOK[0m 
-test-extremalIndex.R..........   50 tests [0;32mOK[0m [0;34m2.6s[0m
+##                       
+## File                   Results fails passes
+##   test-extremalIndex.R      50     0     50
+##   Total                     50     0     50
 ## 
 ## ############## 14 R/texmex/test-glo.R ##############
-## 
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    0 tests    
-test-glo.R....................    1 tests [0;32mOK[0m 
-test-glo.R....................    1 tests [0;32mOK[0m 
-test-glo.R....................    2 tests [0;32mOK[0m 
-test-glo.R....................    2 tests [0;32mOK[0m 
-test-glo.R....................    3 tests [0;32mOK[0m 
-test-glo.R....................    3 tests [0;32mOK[0m 
-test-glo.R....................    4 tests [0;32mOK[0m 
-test-glo.R....................    4 tests [0;32mOK[0m 
-test-glo.R....................    5 tests [0;32mOK[0m 
-test-glo.R....................    5 tests [0;32mOK[0m 
-test-glo.R....................    5 tests [0;32mOK[0m 
-test-glo.R....................    5 tests [0;32mOK[0m 
-test-glo.R....................    5 tests [0;32mOK[0m 
-test-glo.R....................    5 tests [0;32mOK[0m 
-test-glo.R....................   60 tests [0;32mOK[0m 
-test-glo.R....................   60 tests [0;32mOK[0m 
-test-glo.R....................   60 tests [0;32mOK[0m 
-test-glo.R....................   60 tests [0;32mOK[0m</code></pre>
-<pre><code>## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;
-
-## Warning in (p &lt; 0) || (p &gt; 1): &#39;length(x) = 10 &gt; 1&#39; in coercion to &#39;logical(1)&#39;</code></pre>
-<pre><code>## 
-test-glo.R....................  115 tests [0;32mOK[0m 
-test-glo.R....................  116 tests [0;32mOK[0m 
-test-glo.R....................  116 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  117 tests [0;32mOK[0m 
-test-glo.R....................  118 tests [0;32mOK[0m 
-test-glo.R....................  118 tests [0;32mOK[0m 
-test-glo.R....................  118 tests [0;32mOK[0m 
-test-glo.R....................  119 tests [0;32mOK[0m 
-test-glo.R....................  119 tests [0;32mOK[0m 
-test-glo.R....................  119 tests [0;32mOK[0m 
-test-glo.R....................  120 tests [0;32mOK[0m 
-test-glo.R....................  120 tests [0;32mOK[0m 
-test-glo.R....................  120 tests [0;32mOK[0m 
-test-glo.R....................  120 tests [0;32mOK[0m 
-test-glo.R....................  120 tests [0;32mOK[0m 
-test-glo.R....................  120 tests [0;32mOK[0m 
-test-glo.R....................  120 tests [0;32mOK[0m 
-test-glo.R....................  121 tests [0;32mOK[0m 
-test-glo.R....................  121 tests [0;32mOK[0m 
-test-glo.R....................  122 tests [0;32mOK[0m 
-test-glo.R....................  122 tests [0;32mOK[0m 
-test-glo.R....................  122 tests [0;32mOK[0m 
-test-glo.R....................  122 tests [0;32mOK[0m 
-test-glo.R....................  122 tests [0;32mOK[0m 
-test-glo.R....................  122 tests [0;32mOK[0m 
-test-glo.R....................  122 tests [0;32mOK[0m [0;34m57.1s[0m
+##             
+## File         Results fails passes
+##   test-glo.R     110     0    110
+##   Total          110     0    110
 ## 
 ## ############## 15 R/texmex/test-gpd.info.R ##############
-## 
-test-gpd.info.R...............    0 tests    
-test-gpd.info.R...............    0 tests    
-test-gpd.info.R...............    1 tests [0;32mOK[0m 
-test-gpd.info.R...............    1 tests [0;32mOK[0m 
-test-gpd.info.R...............    1 tests [0;32mOK[0m</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-gpd.info.R...............   51 tests [0;32mOK[0m [0;34m4.2s[0m
+##                  
+## File              Results fails passes
+##   test-gpd.info.R      51     0     51
+##   Total                51     0     51
 ## 
 ## ############## 16 R/texmex/test-gpd.prof.R ##############
+##                  
+## File              Results fails passes
+##   test-gpd.prof.R       5     0      5
+##   Total                 5     0      5
 ## 
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    0 tests    
-test-gpd.prof.R...............    1 tests [0;32mOK[0m 
-test-gpd.prof.R...............    2 tests [0;32mOK[0m 
-test-gpd.prof.R...............    3 tests [0;32mOK[0m 
-test-gpd.prof.R...............    3 tests [0;32mOK[0m 
-test-gpd.prof.R...............    3 tests [0;32mOK[0m 
-test-gpd.prof.R...............    4 tests [0;32mOK[0m 
-test-gpd.prof.R...............    5 tests [0;32mOK[0m [0;36m59ms[0m
-## 
-## ############## 17 R/texmex/test-gpdRangeFit.R ##############
-## 
-test-gpdRangeFit.R............    0 tests    
-test-gpdRangeFit.R............    0 tests</code></pre>
-<pre><code>## 
-test-gpdRangeFit.R............    0 tests    
-test-gpdRangeFit.R............    1 tests [0;32mOK[0m [0;34m0.2s[0m
+## ############## 17 R/texmex/test-gpdRangeFit.R ##############</code></pre>
+<pre><code>##                     
+## File                 Results fails passes
+##   test-gpdRangeFit.R       1     0      1
+##   Total                    1     0      1
 ## 
 ## ############## 18 R/texmex/test-gumbel.R ##############
-## 
-test-gumbel.R.................    0 tests    
-test-gumbel.R.................    0 tests    
-test-gumbel.R.................    0 tests    
-test-gumbel.R.................    0 tests    
-test-gumbel.R.................    0 tests    
-test-gumbel.R.................    0 tests    
-test-gumbel.R.................    0 tests    
-test-gumbel.R.................    0 tests    
-test-gumbel.R.................    0 tests    
-test-gumbel.R.................    1 tests [0;32mOK[0m 
-test-gumbel.R.................    2 tests [0;32mOK[0m 
-test-gumbel.R.................    3 tests [0;32mOK[0m 
-test-gumbel.R.................    3 tests [0;32mOK[0m 
-test-gumbel.R.................    3 tests [0;32mOK[0m 
-test-gumbel.R.................    3 tests [0;32mOK[0m 
-test-gumbel.R.................    3 tests [0;32mOK[0m 
-test-gumbel.R.................    3 tests [0;32mOK[0m 
-test-gumbel.R.................    3 tests [0;32mOK[0m 
-test-gumbel.R.................    3 tests [0;32mOK[0m 
-test-gumbel.R.................    3 tests [0;32mOK[0m 
-test-gumbel.R.................    4 tests [0;32mOK[0m 
-test-gumbel.R.................    5 tests [0;32mOK[0m [0;34m0.1s[0m
+##                
+## File            Results fails passes
+##   test-gumbel.R       5     0      5
+##   Total               5     0      5
 ## 
 ## ############## 19 R/texmex/test-jointExceedanceCurve.R ##############
-## 
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    0 tests    
-test-jointExceedanceCurve.R...    1 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    1 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    1 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    2 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    2 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    2 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    2 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    2 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    2 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    7 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    7 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    7 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    7 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    7 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    7 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    7 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    7 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    8 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    9 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    9 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    9 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...    9 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   10 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   10 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   10 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   10 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   10 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   11 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   12 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   13 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   13 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   13 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   13 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   13 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   13 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   13 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   14 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   15 tests [0;32mOK[0m 
-test-jointExceedanceCurve.R...   16 tests [0;32mOK[0m [0;34m26.3s[0m
+##                              
+## File                          Results fails passes
+##   test-jointExceedanceCurve.R      16     0     16
+##   Total                            16     0     16
 ## 
 ## ############## 20 R/texmex/test-log1mexp.R ##############
-## 
-test-log1mexp.R...............    0 tests    
-test-log1mexp.R...............    0 tests    
-test-log1mexp.R...............    1 tests [0;32mOK[0m 
-test-log1mexp.R...............    2 tests [0;32mOK[0m 
-test-log1mexp.R...............    3 tests [0;32mOK[0m 
-test-log1mexp.R...............    4 tests [0;32mOK[0m 
-test-log1mexp.R...............    5 tests [0;32mOK[0m [0;36m1ms[0m
+##                  
+## File              Results fails passes
+##   test-log1mexp.R       5     0      5
+##   Total                 5     0      5
 ## 
 ## ############## 21 R/texmex/test-log1prel.R ##############
-## 
-test-log1prel.R...............    0 tests    
-test-log1prel.R...............    0 tests    
-test-log1prel.R...............    0 tests    
-test-log1prel.R...............    0 tests    
-test-log1prel.R...............    0 tests    
-test-log1prel.R...............    0 tests    
-test-log1prel.R...............    0 tests    
-test-log1prel.R...............    1 tests [0;32mOK[0m 
-test-log1prel.R...............    2 tests [0;32mOK[0m 
-test-log1prel.R...............    3 tests [0;32mOK[0m 
-test-log1prel.R...............    4 tests [0;32mOK[0m 
-test-log1prel.R...............    4 tests [0;32mOK[0m 
-test-log1prel.R...............    4 tests [0;32mOK[0m 
-test-log1prel.R...............    4 tests [0;32mOK[0m 
-test-log1prel.R...............    5 tests [0;32mOK[0m [0;36m1ms[0m
+##                  
+## File              Results fails passes
+##   test-log1prel.R       5     0      5
+##   Total                 5     0      5
 ## 
 ## ############## 22 R/texmex/test-makeReferenceMarginalDistribution.R ##############
-## 
-test-makeReferenceMarginalDistribution.R    0 tests    
-test-makeReferenceMarginalDistribution.R    0 tests    
-test-makeReferenceMarginalDistribution.R    0 tests    
-test-makeReferenceMarginalDistribution.R    0 tests    
-test-makeReferenceMarginalDistribution.R    0 tests    
-test-makeReferenceMarginalDistribution.R    0 tests    
-test-makeReferenceMarginalDistribution.R    0 tests    
-test-makeReferenceMarginalDistribution.R    0 tests    
-test-makeReferenceMarginalDistribution.R    1 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R    2 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R    3 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R    4 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R    5 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R    6 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R    7 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R    8 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R    9 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R   10 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R   10 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R   10 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R   10 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R   10 tests [0;32mOK[0m 
-test-makeReferenceMarginalDistribution.R   11 tests [0;32mOK[0m [0;34m0.1s[0m
+##                                           
+## File                                       Results fails passes
+##   test-makeReferenceMarginalDistribution.R      11     0     11
+##   Total                                         11     0     11
 ## 
 ## ############## 23 R/texmex/test-MCS.R ##############
-## 
-test-MCS.R....................    0 tests    
-test-MCS.R....................    0 tests    
-test-MCS.R....................    0 tests    
-test-MCS.R....................    0 tests    
-test-MCS.R....................    0 tests    
-test-MCS.R....................    0 tests    
-test-MCS.R....................    0 tests    
-test-MCS.R....................    0 tests    
-test-MCS.R....................    1 tests [0;32mOK[0m 
-test-MCS.R....................    2 tests [0;32mOK[0m 
-test-MCS.R....................    2 tests [0;32mOK[0m 
-test-MCS.R....................    2 tests [0;32mOK[0m 
-test-MCS.R....................    3 tests [0;32mOK[0m 
-test-MCS.R....................    3 tests [0;32mOK[0m 
-test-MCS.R....................    3 tests [0;32mOK[0m 
-test-MCS.R....................    4 tests [0;32mOK[0m [0;34m0.6s[0m
+##             
+## File         Results fails passes
+##   test-MCS.R       4     0      4
+##   Total            4     0      4
 ## 
 ## ############## 24 R/texmex/test-mexDependence.R ##############
+##                       
+## File                   Results fails passes
+##   test-mexDependence.R      39     0     39
+##   Total                     39     0     39
 ## 
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    0 tests    
-test-mexDependence.R..........    1 tests [0;32mOK[0m 
-test-mexDependence.R..........    2 tests [0;32mOK[0m 
-test-mexDependence.R..........    3 tests [0;32mOK[0m 
-test-mexDependence.R..........    4 tests [0;32mOK[0m 
-test-mexDependence.R..........    5 tests [0;32mOK[0m 
-test-mexDependence.R..........    6 tests [0;32mOK[0m 
-test-mexDependence.R..........    7 tests [0;32mOK[0m 
-test-mexDependence.R..........    8 tests [0;32mOK[0m 
-test-mexDependence.R..........    9 tests [0;32mOK[0m 
-test-mexDependence.R..........   10 tests [0;32mOK[0m 
-test-mexDependence.R..........   10 tests [0;32mOK[0m 
-test-mexDependence.R..........   10 tests [0;32mOK[0m 
-test-mexDependence.R..........   11 tests [0;32mOK[0m 
-test-mexDependence.R..........   12 tests [0;32mOK[0m 
-test-mexDependence.R..........   13 tests [0;32mOK[0m 
-test-mexDependence.R..........   13 tests [0;32mOK[0m 
-test-mexDependence.R..........   13 tests [0;32mOK[0m 
-test-mexDependence.R..........   13 tests [0;32mOK[0m 
-test-mexDependence.R..........   13 tests [0;32mOK[0m 
-test-mexDependence.R..........   13 tests [0;32mOK[0m</code></pre>
-<pre><code>## Assuming same quantile for dependence thesholding as was used
-##      to fit corresponding marginal model...</code></pre>
-<pre><code>## 
-test-mexDependence.R..........   13 tests [0;32mOK[0m 
-test-mexDependence.R..........   13 tests [0;32mOK[0m 
-test-mexDependence.R..........   14 tests [0;32mOK[0m 
-test-mexDependence.R..........   15 tests [0;32mOK[0m 
-test-mexDependence.R..........   16 tests [0;32mOK[0m 
-test-mexDependence.R..........   17 tests [0;32mOK[0m 
-test-mexDependence.R..........   18 tests [0;32mOK[0m 
-test-mexDependence.R..........   19 tests [0;32mOK[0m 
-test-mexDependence.R..........   20 tests [0;32mOK[0m 
-test-mexDependence.R..........   21 tests [0;32mOK[0m 
-test-mexDependence.R..........   22 tests [0;32mOK[0m 
-test-mexDependence.R..........   23 tests [0;32mOK[0m 
-test-mexDependence.R..........   24 tests [0;32mOK[0m 
-test-mexDependence.R..........   25 tests [0;32mOK[0m 
-test-mexDependence.R..........   26 tests [0;32mOK[0m 
-test-mexDependence.R..........   27 tests [0;32mOK[0m 
-test-mexDependence.R..........   27 tests [0;32mOK[0m 
-test-mexDependence.R..........   27 tests [0;32mOK[0m 
-test-mexDependence.R..........   27 tests [0;32mOK[0m 
-test-mexDependence.R..........   27 tests [0;32mOK[0m 
-test-mexDependence.R..........   27 tests [0;32mOK[0m 
-test-mexDependence.R..........   27 tests [0;32mOK[0m 
-test-mexDependence.R..........   27 tests [0;32mOK[0m 
-test-mexDependence.R..........   27 tests [0;32mOK[0m 
-test-mexDependence.R..........   28 tests [0;32mOK[0m 
-test-mexDependence.R..........   29 tests [0;32mOK[0m 
-test-mexDependence.R..........   30 tests [0;32mOK[0m 
-test-mexDependence.R..........   30 tests [0;32mOK[0m 
-test-mexDependence.R..........   30 tests [0;32mOK[0m 
-test-mexDependence.R..........   31 tests [0;32mOK[0m 
-test-mexDependence.R..........   32 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   33 tests [0;32mOK[0m 
-test-mexDependence.R..........   39 tests [0;32mOK[0m [0;34m51.2s[0m
-## 
-## ############## 25 R/texmex/test-mexRangeFit.R ##############
-## 
-test-mexRangeFit.R............    0 tests    
-test-mexRangeFit.R............    0 tests    
-test-mexRangeFit.R............    0 tests    
-test-mexRangeFit.R............    0 tests    
-test-mexRangeFit.R............    0 tests    
-test-mexRangeFit.R............    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-mexRangeFit.R............    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-mexRangeFit.R............    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-mexRangeFit.R............    0 tests    
-test-mexRangeFit.R............    1 tests [0;32mOK[0m 
-test-mexRangeFit.R............    2 tests [0;32mOK[0m 
-test-mexRangeFit.R............    3 tests [0;32mOK[0m 
-test-mexRangeFit.R............    4 tests [0;32mOK[0m 
-test-mexRangeFit.R............    5 tests [0;32mOK[0m 
-test-mexRangeFit.R............    6 tests [0;32mOK[0m 
-test-mexRangeFit.R............    7 tests [0;32mOK[0m 
-test-mexRangeFit.R............    8 tests [0;32mOK[0m 
-test-mexRangeFit.R............    8 tests [0;32mOK[0m 
-test-mexRangeFit.R............    8 tests [0;32mOK[0m 
-test-mexRangeFit.R............    8 tests [0;32mOK[0m 
-test-mexRangeFit.R............    8 tests [0;32mOK[0m 
-test-mexRangeFit.R............    8 tests [0;32mOK[0m 
-test-mexRangeFit.R............    9 tests [0;32mOK[0m 
-test-mexRangeFit.R............    9 tests [0;32mOK[0m 
-test-mexRangeFit.R............    9 tests [0;32mOK[0m 
-test-mexRangeFit.R............    9 tests [0;32mOK[0m 
-test-mexRangeFit.R............    9 tests [0;32mOK[0m 
-test-mexRangeFit.R............    9 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-mexRangeFit.R............    9 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-mexRangeFit.R............    9 tests [0;32mOK[0m [0;34m15.5s[0m
+## ############## 25 R/texmex/test-mexRangeFit.R ##############</code></pre>
+<pre><code>##                     
+## File                 Results fails passes
+##   test-mexRangeFit.R       9     0      9
+##   Total                    9     0      9
 ## 
 ## ############## 26 R/texmex/test-migpd.R ##############
-## 
-test-migpd.R..................    0 tests    
-test-migpd.R..................    0 tests    
-test-migpd.R..................    0 tests    
-test-migpd.R..................    0 tests    
-test-migpd.R..................    0 tests    
-test-migpd.R..................    8 tests [0;32mOK[0m 
-test-migpd.R..................    8 tests [0;32mOK[0m 
-test-migpd.R..................    9 tests [0;32mOK[0m [0;36m41ms[0m
+##               
+## File           Results fails passes
+##   test-migpd.R       9     0      9
+##   Total              9     0      9
 ## 
 ## ############## 27 R/texmex/test-migpdCoefs.R ##############
+##                    
+## File                Results fails passes
+##   test-migpdCoefs.R       4     0      4
+##   Total                   4     0      4
 ## 
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    0 tests    
-test-migpdCoefs.R.............    1 tests [0;32mOK[0m 
-test-migpdCoefs.R.............    2 tests [0;32mOK[0m 
-test-migpdCoefs.R.............    2 tests [0;32mOK[0m 
-test-migpdCoefs.R.............    2 tests [0;32mOK[0m 
-test-migpdCoefs.R.............    2 tests [0;32mOK[0m 
-test-migpdCoefs.R.............    2 tests [0;32mOK[0m 
-test-migpdCoefs.R.............    2 tests [0;32mOK[0m 
-test-migpdCoefs.R.............    3 tests [0;32mOK[0m 
-test-migpdCoefs.R.............    4 tests [0;32mOK[0m [0;36m32ms[0m
-## 
-## ############## 28 R/texmex/test-mrl.R ##############
-## 
-test-mrl.R....................    0 tests    
-test-mrl.R....................    0 tests</code></pre>
-<pre><code>## 
-test-mrl.R....................    0 tests    
-test-mrl.R....................    1 tests [0;32mOK[0m [0;36m29ms[0m
+## ############## 28 R/texmex/test-mrl.R ##############</code></pre>
+<pre><code>##             
+## File         Results fails passes
+##   test-mrl.R       1     0      1
+##   Total            1     0      1
 ## 
 ## ############## 29 R/texmex/test-pgev.R ##############
-## 
-test-pgev.R...................    0 tests    
-test-pgev.R...................    0 tests    
-test-pgev.R...................    0 tests    
-test-pgev.R...................    0 tests    
-test-pgev.R...................    0 tests    
-test-pgev.R...................   55 tests [0;32mOK[0m 
-test-pgev.R...................   88 tests [0;32mOK[0m [0;36m13ms[0m
+##              
+## File          Results fails passes
+##   test-pgev.R      88     0     88
+##   Total            88     0     88
 ## 
 ## ############## 30 R/texmex/test-pgpd.R ##############
+##              
+## File          Results fails passes
+##   test-pgpd.R      10     0     10
+##   Total            10     0     10
 ## 
-test-pgpd.R...................    0 tests    
-test-pgpd.R...................    0 tests    
-test-pgpd.R...................    0 tests    
-test-pgpd.R...................    0 tests    
-test-pgpd.R...................    0 tests    
-test-pgpd.R...................    0 tests    
-test-pgpd.R...................    0 tests    
-test-pgpd.R...................    0 tests    
-test-pgpd.R...................    0 tests    
-test-pgpd.R...................    1 tests [0;32mOK[0m 
-test-pgpd.R...................    1 tests [0;32mOK[0m 
-test-pgpd.R...................    1 tests [0;32mOK[0m 
-test-pgpd.R...................    2 tests [0;32mOK[0m 
-test-pgpd.R...................    2 tests [0;32mOK[0m 
-test-pgpd.R...................    2 tests [0;32mOK[0m 
-test-pgpd.R...................    3 tests [0;32mOK[0m 
-test-pgpd.R...................    3 tests [0;32mOK[0m 
-test-pgpd.R...................    3 tests [0;32mOK[0m 
-test-pgpd.R...................    3 tests [0;32mOK[0m 
-test-pgpd.R...................    3 tests [0;32mOK[0m 
-test-pgpd.R...................    3 tests [0;32mOK[0m 
-test-pgpd.R...................    3 tests [0;32mOK[0m 
-test-pgpd.R...................    4 tests [0;32mOK[0m 
-test-pgpd.R...................    4 tests [0;32mOK[0m 
-test-pgpd.R...................    5 tests [0;32mOK[0m 
-test-pgpd.R...................    5 tests [0;32mOK[0m 
-test-pgpd.R...................    6 tests [0;32mOK[0m 
-test-pgpd.R...................    6 tests [0;32mOK[0m 
-test-pgpd.R...................    7 tests [0;32mOK[0m 
-test-pgpd.R...................    7 tests [0;32mOK[0m 
-test-pgpd.R...................    8 tests [0;32mOK[0m 
-test-pgpd.R...................    8 tests [0;32mOK[0m 
-test-pgpd.R...................    8 tests [0;32mOK[0m 
-test-pgpd.R...................    9 tests [0;32mOK[0m 
-test-pgpd.R...................    9 tests [0;32mOK[0m 
-test-pgpd.R...................   10 tests [0;32mOK[0m [0;34m0.1s[0m
-## 
-## ############## 31 R/texmex/test-plot.bootmex.R ##############
-## 
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
+## ############## 31 R/texmex/test-plot.bootmex.R ##############</code></pre>
 <pre><code>## Warning in qfun(dat[, X], yex, wh, aLow, margins, constrain, v, maxit, start[, : Non-convergence in mexDependence</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## Pass 2 : 1 samples to rerun.</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests</code></pre>
-<pre><code>## 
-test-plot.bootmex.R...........    0 tests    
-test-plot.bootmex.R...........    1 tests [0;32mOK[0m 
-test-plot.bootmex.R...........    2 tests [0;32mOK[0m 
-test-plot.bootmex.R...........    3 tests [0;32mOK[0m [0;34m29.3s[0m
+<pre><code>##                      
+## File                  Results fails passes
+##   test-plot.bootmex.R       3     0      3
+##   Total                     3     0      3
 ## 
-## ############## 32 R/texmex/test-plot.chi.R ##############
+## ############## 32 R/texmex/test-plot.chi.R ##############</code></pre>
+<pre><code>##                  
+## File              Results fails passes
+##   test-plot.chi.R       1     0      1
+##   Total                 1     0      1
 ## 
-test-plot.chi.R...............    0 tests    
-test-plot.chi.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.chi.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.chi.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.chi.R...............    0 tests    
-test-plot.chi.R...............    1 tests [0;32mOK[0m [0;36m79ms[0m
+## ############## 33 R/texmex/test-plot.evmOpt.R ##############</code></pre>
+<pre><code>##                     
+## File                 Results fails passes
+##   test-plot.evmOpt.R       7     0      7
+##   Total                    7     0      7
 ## 
-## ############## 33 R/texmex/test-plot.evmOpt.R ##############
+## ############## 34 R/texmex/test-plot.mex.R ##############</code></pre>
+<pre><code>##                  
+## File              Results fails passes
+##   test-plot.mex.R       3     0      3
+##   Total                 3     0      3
 ## 
-test-plot.evmOpt.R............    0 tests    
-test-plot.evmOpt.R............    0 tests</code></pre>
-<pre><code>## 
-test-plot.evmOpt.R............    0 tests    
-test-plot.evmOpt.R............    1 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    1 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    1 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    1 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-plot.evmOpt.R............    1 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    2 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    2 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    2 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    2 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    2 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    2 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    2 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-plot.evmOpt.R............    2 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    3 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    3 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    3 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    3 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    3 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-plot.evmOpt.R............    3 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    4 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    4 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    4 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-plot.evmOpt.R............    4 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    5 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    5 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    5 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    5 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    5 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    5 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-plot.evmOpt.R............    5 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    6 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    6 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    6 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-plot.evmOpt.R............    6 tests [0;32mOK[0m 
-test-plot.evmOpt.R............    7 tests [0;32mOK[0m [0;34m6.3s[0m
+## ############## 35 R/texmex/test-plot.migpd.R ##############</code></pre>
+<pre><code>##                    
+## File                Results fails passes
+##   test-plot.migpd.R       1     0      1
+##   Total                   1     0      1
 ## 
-## ############## 34 R/texmex/test-plot.mex.R ##############
+## ############## 36 R/texmex/test-plot.predict.evm.R ##############</code></pre>
+<pre><code>##                          
+## File                      Results fails passes
+##   test-plot.predict.evm.R       6     0      6
+##   Total                         6     0      6
 ## 
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    0 tests    
-test-plot.mex.R...............    1 tests [0;32mOK[0m 
-test-plot.mex.R...............    2 tests [0;32mOK[0m 
-test-plot.mex.R...............    2 tests [0;32mOK[0m 
-test-plot.mex.R...............    2 tests [0;32mOK[0m 
-test-plot.mex.R...............    2 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-plot.mex.R...............    2 tests [0;32mOK[0m 
-test-plot.mex.R...............    3 tests [0;32mOK[0m [0;34m6.4s[0m
+## ############## 37 R/texmex/test-plot.predict.mex.R ##############</code></pre>
+<pre><code>##                          
+## File                      Results fails passes
+##   test-plot.predict.mex.R       2     0      2
+##   Total                         2     0      2
 ## 
-## ############## 35 R/texmex/test-plot.migpd.R ##############
+## ############## 38 R/texmex/test-plotrl.evm.R ##############</code></pre>
+<pre><code>##                    
+## File                Results fails passes
+##   test-plotrl.evm.R       2     0      2
+##   Total                   2     0      2
 ## 
-test-plot.migpd.R.............    0 tests    
-test-plot.migpd.R.............    0 tests</code></pre>
-<pre><code>## 
-test-plot.migpd.R.............    0 tests    
-test-plot.migpd.R.............    1 tests [0;32mOK[0m [0;34m1.7s[0m
-## 
-## ############## 36 R/texmex/test-plot.predict.evm.R ##############
-## 
-test-plot.predict.evm.R.......    0 tests</code></pre>
-<pre><code>## Ratio of bias to standard error is high</code></pre>
-<pre><code>## Ratio of bias to standard error is high
-## Ratio of bias to standard error is high
-## Ratio of bias to standard error is high</code></pre>
-<pre><code>## 
-test-plot.predict.evm.R.......    6 tests [0;32mOK[0m [0;34m1.6s[0m
-## 
-## ############## 37 R/texmex/test-plot.predict.mex.R ##############
-## 
-test-plot.predict.mex.R.......    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-plot.predict.mex.R.......    0 tests    
-test-plot.predict.mex.R.......    0 tests    
-test-plot.predict.mex.R.......    0 tests</code></pre>
-<pre><code>## 
-test-plot.predict.mex.R.......    0 tests    
-test-plot.predict.mex.R.......    1 tests [0;32mOK[0m 
-test-plot.predict.mex.R.......    1 tests [0;32mOK[0m 
-test-plot.predict.mex.R.......    1 tests [0;32mOK[0m 
-test-plot.predict.mex.R.......    1 tests [0;32mOK[0m 
-test-plot.predict.mex.R.......    1 tests [0;32mOK[0m 
-test-plot.predict.mex.R.......    1 tests [0;32mOK[0m 
-test-plot.predict.mex.R.......    1 tests [0;32mOK[0m</code></pre>
-<pre><code>## 
-test-plot.predict.mex.R.......    1 tests [0;32mOK[0m 
-test-plot.predict.mex.R.......    2 tests [0;32mOK[0m [0;34m9.4s[0m
-## 
-## ############## 38 R/texmex/test-plotrl.evm.R ##############
-## 
-test-plotrl.evm.R.............    0 tests    
-test-plotrl.evm.R.............    0 tests</code></pre>
-<pre><code>## 
-test-plotrl.evm.R.............    0 tests    
-test-plotrl.evm.R.............    0 tests</code></pre>
-<pre><code>## 
-test-plotrl.evm.R.............    0 tests    
-test-plotrl.evm.R.............    2 tests [0;32mOK[0m [0;34m0.2s[0m
-## 
-## ############## 39 R/texmex/test-predict.evmBoot.R ##############
-## 
-test-predict.evmBoot.R........    0 tests    
-test-predict.evmBoot.R........    0 tests    
-test-predict.evmBoot.R........    0 tests    
-test-predict.evmBoot.R........    0 tests</code></pre>
-<pre><code>## Ratio of bias to standard error is high</code></pre>
-<pre><code>## Ratio of bias to standard error is high</code></pre>
-<pre><code>## 
-test-predict.evmBoot.R........   94 tests [0;32mOK[0m [0;34m9.6s[0m
+## ############## 39 R/texmex/test-predict.evmBoot.R ##############</code></pre>
+<pre><code>##                         
+## File                     Results fails passes
+##   test-predict.evmBoot.R      94     0     94
+##   Total                       94     0     94
 ## 
 ## ############## 40 R/texmex/test-predict.evmOpt.R ##############
-## 
-test-predict.evmOpt.R.........  103 tests [0;32mOK[0m [0;34m33.3s[0m
+##                        
+## File                    Results fails passes
+##   test-predict.evmOpt.R     103     0    103
+##   Total                     103     0    103
 ## 
 ## ############## 41 R/texmex/test-predict.evmSim.R ##############
-## 
-test-predict.evmSim.R.........   61 tests [0;32mOK[0m [0;34m49.0s[0m
+##                        
+## File                    Results fails passes
+##   test-predict.evmSim.R      61     0     61
+##   Total                      61     0     61
 ## 
 ## ############## 42 R/texmex/test-predict.mex.R ##############
-## 
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests</code></pre>
-<pre><code>## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5
-## Fitted values of xi &lt; -0.5</code></pre>
-<pre><code>## 
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    0 tests    
-test-predict.mex.R............    1 tests [0;32mOK[0m 
-test-predict.mex.R............    2 tests [0;32mOK[0m 
-test-predict.mex.R............    3 tests [0;32mOK[0m 
-test-predict.mex.R............    4 tests [0;32mOK[0m 
-test-predict.mex.R............    4 tests [0;32mOK[0m 
-test-predict.mex.R............    4 tests [0;32mOK[0m 
-test-predict.mex.R............    4 tests [0;32mOK[0m 
-test-predict.mex.R............    4 tests [0;32mOK[0m 
-test-predict.mex.R............    4 tests [0;32mOK[0m 
-test-predict.mex.R............    5 tests [0;32mOK[0m 
-test-predict.mex.R............    6 tests [0;32mOK[0m 
-test-predict.mex.R............    7 tests [0;32mOK[0m 
-test-predict.mex.R............    7 tests [0;32mOK[0m 
-test-predict.mex.R............    7 tests [0;32mOK[0m 
-test-predict.mex.R............    7 tests [0;32mOK[0m 
-test-predict.mex.R............    7 tests [0;32mOK[0m 
-test-predict.mex.R............    7 tests [0;32mOK[0m 
-test-predict.mex.R............    7 tests [0;32mOK[0m 
-test-predict.mex.R............   12 tests [0;32mOK[0m [0;34m7.2s[0m
+##                     
+## File                 Results fails passes
+##   test-predict.mex.R      12     0     12
+##   Total                   12     0     12
 ## 
 ## ############## 43 R/texmex/test-qgev.R ##############
-## 
-test-qgev.R...................    0 tests    
-test-qgev.R...................    0 tests    
-test-qgev.R...................    0 tests    
-test-qgev.R...................   55 tests [0;32mOK[0m 
-test-qgev.R...................   56 tests [0;32mOK[0m 
-test-qgev.R...................   56 tests [0;32mOK[0m 
-test-qgev.R...................   57 tests [0;32mOK[0m [0;36m8ms[0m
+##              
+## File          Results fails passes
+##   test-qgev.R      57     0     57
+##   Total            57     0     57
 ## 
 ## ############## 44 R/texmex/test-qgpd.R ##############
-## 
-test-qgpd.R...................    0 tests    
-test-qgpd.R...................    0 tests    
-test-qgpd.R...................    0 tests    
-test-qgpd.R...................    1 tests [0;32mOK[0m 
-test-qgpd.R...................    2 tests [0;32mOK[0m 
-test-qgpd.R...................    2 tests [0;32mOK[0m 
-test-qgpd.R...................    2 tests [0;32mOK[0m 
-test-qgpd.R...................    2 tests [0;32mOK[0m 
-test-qgpd.R...................    2 tests [0;32mOK[0m 
-test-qgpd.R...................    2 tests [0;32mOK[0m 
-test-qgpd.R...................    2 tests [0;32mOK[0m 
-test-qgpd.R...................    4 tests [0;32mOK[0m 
-test-qgpd.R...................    4 tests [0;32mOK[0m 
-test-qgpd.R...................    6 tests [0;32mOK[0m 
-test-qgpd.R...................    6 tests [0;32mOK[0m 
-test-qgpd.R...................    8 tests [0;32mOK[0m 
-test-qgpd.R...................    8 tests [0;32mOK[0m 
-test-qgpd.R...................    8 tests [0;32mOK[0m 
-test-qgpd.R...................    8 tests [0;32mOK[0m 
-test-qgpd.R...................    8 tests [0;32mOK[0m 
-test-qgpd.R...................    8 tests [0;32mOK[0m 
-test-qgpd.R...................    8 tests [0;32mOK[0m 
-test-qgpd.R...................    9 tests [0;32mOK[0m 
-test-qgpd.R...................    9 tests [0;32mOK[0m 
-test-qgpd.R...................   10 tests [0;32mOK[0m 
-test-qgpd.R...................   10 tests [0;32mOK[0m 
-test-qgpd.R...................   11 tests [0;32mOK[0m [0;34m0.1s[0m
+##              
+## File          Results fails passes
+##   test-qgpd.R      11     0     11
+##   Total            11     0     11
 ## 
 ## ############## 45 R/texmex/test-revTransform.R ##############
-## 
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    0 tests    
-test-revTransform.R...........    1 tests [0;32mOK[0m 
-test-revTransform.R...........    2 tests [0;32mOK[0m 
-test-revTransform.R...........    3 tests [0;32mOK[0m 
-test-revTransform.R...........    4 tests [0;32mOK[0m [0;34m1.0s[0m
+##                      
+## File                  Results fails passes
+##   test-revTransform.R       4     0      4
+##   Total                     4     0      4
 ## 
 ## ############## 46 R/texmex/test-rgev.R ##############
-## 
-test-rgev.R...................    0 tests    
-test-rgev.R...................    0 tests    
-test-rgev.R...................    0 tests    
-test-rgev.R...................    0 tests    
-test-rgev.R...................    0 tests    
-test-rgev.R...................    0 tests    
-test-rgev.R...................   43 tests [0;32mOK[0m [0;34m1.5s[0m
+##              
+## File          Results fails passes
+##   test-rgev.R      43     0     43
+##   Total            43     0     43
 ## 
 ## ############## 47 R/texmex/test-rgpd.R ##############
-## 
-test-rgpd.R...................    0 tests    
-test-rgpd.R...................    0 tests    
-test-rgpd.R...................    0 tests    
-test-rgpd.R...................    0 tests    
-test-rgpd.R...................    0 tests    
-test-rgpd.R...................    0 tests    
-test-rgpd.R...................   30 tests [0;32mOK[0m [0;34m1.1s[0m
+##              
+## File          Results fails passes
+##   test-rgpd.R      30     0     30
+##   Total            30     0     30
 ## 
 ## ############## 48 R/texmex/test-simulate.R ##############
-## 
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    1 tests [0;32mOK[0m 
-test-simulate.R...............    1 tests [0;32mOK[0m 
-test-simulate.R...............    1 tests [0;32mOK[0m 
-test-simulate.R...............    1 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    3 tests [0;32mOK[0m 
-test-simulate.R...............    3 tests [0;32mOK[0m 
-test-simulate.R...............    4 tests [0;32mOK[0m 
-test-simulate.R...............    5 tests [0;32mOK[0m 
-test-simulate.R...............    6 tests [0;32mOK[0m 
-test-simulate.R...............    6 tests [0;32mOK[0m 
-test-simulate.R...............    7 tests [0;32mOK[0m 
-test-simulate.R...............    8 tests [0;32mOK[0m 
-test-simulate.R...............    9 tests [0;32mOK[0m 
-test-simulate.R...............    9 tests [0;32mOK[0m 
-test-simulate.R...............   10 tests [0;32mOK[0m 
-test-simulate.R...............   11 tests [0;32mOK[0m 
-test-simulate.R...............   12 tests [0;32mOK[0m 
-test-simulate.R...............   12 tests [0;32mOK[0m 
-test-simulate.R...............   12 tests [0;32mOK[0m 
-test-simulate.R...............   12 tests [0;32mOK[0m 
-test-simulate.R...............   12 tests [0;32mOK[0m 
-test-simulate.R...............   12 tests [0;32mOK[0m 
-test-simulate.R...............   13 tests [0;32mOK[0m 
-test-simulate.R...............   13 tests [0;32mOK[0m 
-test-simulate.R...............   13 tests [0;32mOK[0m 
-test-simulate.R...............   13 tests [0;32mOK[0m 
-test-simulate.R...............   14 tests [0;32mOK[0m 
-test-simulate.R...............   14 tests [0;32mOK[0m 
-test-simulate.R...............   14 tests [0;32mOK[0m 
-test-simulate.R...............   14 tests [0;32mOK[0m 
-test-simulate.R...............   15 tests [0;32mOK[0m 
-test-simulate.R...............   15 tests [0;32mOK[0m 
-test-simulate.R...............   15 tests [0;32mOK[0m 
-test-simulate.R...............   16 tests [0;32mOK[0m 
-test-simulate.R...............   17 tests [0;32mOK[0m 
-test-simulate.R...............   18 tests [0;32mOK[0m 
-test-simulate.R...............   18 tests [0;32mOK[0m 
-test-simulate.R...............   19 tests [0;32mOK[0m 
-test-simulate.R...............   20 tests [0;32mOK[0m 
-test-simulate.R...............   21 tests [0;32mOK[0m 
-test-simulate.R...............   21 tests [0;32mOK[0m 
-test-simulate.R...............   22 tests [0;32mOK[0m 
-test-simulate.R...............   23 tests [0;32mOK[0m 
-test-simulate.R...............   24 tests [0;32mOK[0m [0;34m9.5s[0m
+##                  
+## File              Results fails passes
+##   test-simulate.R      24     0     24
+##   Total                24     0     24
 ## 
 ## ############## 49 R/texmex/test-specfun.safe.product.R ##############
-## 
-test-specfun.safe.product.R...    0 tests    
-test-specfun.safe.product.R...    0 tests    
-test-specfun.safe.product.R...    0 tests    
-test-specfun.safe.product.R...    1 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    1 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    1 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    1 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    2 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    2 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    2 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    2 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    3 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    3 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    3 tests [0;32mOK[0m 
-test-specfun.safe.product.R...    4 tests [0;32mOK[0m [0;36m2ms[0m
+##                              
+## File                          Results fails passes
+##   test-specfun.safe.product.R       4     0      4
+##   Total                             4     0      4
 ## 
 ## ############## 50 R/texmex/test-thinAndBurn.evmSim.R ##############
+##                            
+## File                        Results fails passes
+##   test-thinAndBurn.evmSim.R      11     0     11
+##   Total                          11     0     11
 ## 
-test-thinAndBurn.evmSim.R.....    0 tests    
-test-thinAndBurn.evmSim.R.....    0 tests    
-test-thinAndBurn.evmSim.R.....    0 tests    
-test-thinAndBurn.evmSim.R.....    0 tests    
-test-thinAndBurn.evmSim.R.....    1 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    2 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    2 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    2 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    3 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    3 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    3 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    4 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    4 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    5 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    6 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    7 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    7 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    7 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    7 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    8 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    9 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    9 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    9 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....    9 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....   10 tests [0;32mOK[0m 
-test-thinAndBurn.evmSim.R.....   11 tests [0;32mOK[0m [0;36m3ms[0m
-## 
-## ############## 51 R/texmex/test-WAIC.R ##############</code></pre>
-<pre><code>## 10000 steps taken</code></pre>
-<pre><code>## 20000 steps taken</code></pre>
-<pre><code>## 30000 steps taken</code></pre>
-<pre><code>## 40000 steps taken</code></pre>
-<pre><code>## Acceptance rate:0.358</code></pre>
-<pre><code>## 
-test-WAIC.R...................    0 tests    
-test-WAIC.R...................    0 tests    
-test-WAIC.R...................    1 tests [0;32mOK[0m 
-test-WAIC.R...................    1 tests [0;32mOK[0m 
-test-WAIC.R...................    2 tests [0;32mOK[0m 
-test-WAIC.R...................    2 tests [0;32mOK[0m 
-test-WAIC.R...................    3 tests [0;32mOK[0m 
-test-WAIC.R...................    3 tests [0;32mOK[0m 
-test-WAIC.R...................    4 tests [0;32mOK[0m 
-test-WAIC.R...................    4 tests [0;32mOK[0m 
-test-WAIC.R...................    4 tests [0;32mOK[0m 
-test-WAIC.R...................    4 tests [0;32mOK[0m 
-test-WAIC.R...................    5 tests [0;32mOK[0m</code></pre>
-<pre><code>## 10000 steps taken</code></pre>
-<pre><code>## 20000 steps taken</code></pre>
-<pre><code>## 30000 steps taken</code></pre>
-<pre><code>## 40000 steps taken</code></pre>
-<pre><code>## Acceptance rate:0.358</code></pre>
-<pre><code>## 
-test-WAIC.R...................    5 tests [0;32mOK[0m</code></pre>
-<pre><code>## 10000 steps taken</code></pre>
-<pre><code>## 20000 steps taken</code></pre>
-<pre><code>## 30000 steps taken</code></pre>
-<pre><code>## 40000 steps taken</code></pre>
-<pre><code>## Acceptance rate:0.32</code></pre>
-<pre><code>## 
-test-WAIC.R...................    5 tests [0;32mOK[0m 
-test-WAIC.R...................    6 tests [0;32mOK[0m 
-test-WAIC.R...................    6 tests [0;32mOK[0m 
-test-WAIC.R...................    6 tests [0;32mOK[0m 
-test-WAIC.R...................    7 tests [0;32mOK[0m [0;34m32.5s[0m
+## ############## 51 R/texmex/test-WAIC.R ##############
+##              
+## File          Results fails passes
+##   test-WAIC.R       7     0      7
+##   Total             7     0      7
 ## 
 ## ############## 52 R/texmex/test-weibull.R ##############
-## 
-test-weibull.R................    0 tests    
-test-weibull.R................    0 tests    
-test-weibull.R................    0 tests    
-test-weibull.R................    0 tests    
-test-weibull.R................    0 tests    
-test-weibull.R................    0 tests    
-test-weibull.R................    0 tests    
-test-weibull.R................    0 tests    
-test-weibull.R................    1 tests [0;32mOK[0m 
-test-weibull.R................    2 tests [0;32mOK[0m 
-test-weibull.R................    3 tests [0;32mOK[0m 
-test-weibull.R................    3 tests [0;32mOK[0m 
-test-weibull.R................    3 tests [0;32mOK[0m 
-test-weibull.R................    3 tests [0;32mOK[0m 
-test-weibull.R................    3 tests [0;32mOK[0m 
-test-weibull.R................    3 tests [0;32mOK[0m 
-test-weibull.R................    3 tests [0;32mOK[0m 
-test-weibull.R................    3 tests [0;32mOK[0m 
-test-weibull.R................    3 tests [0;32mOK[0m 
-test-weibull.R................    4 tests [0;32mOK[0m 
-test-weibull.R................    5 tests [0;32mOK[0m [0;36m58ms[0m</code></pre>
+##                 
+## File             Results fails passes
+##   test-weibull.R       5     0      5
+##   Total                5     0      5</code></pre>
 <pre class="r"><code>dev.off()</code></pre>
 <pre><code>## png 
 ##   2</code></pre>
@@ -2158,225 +555,32 @@ length(testFiles)</code></pre>
 pdf(&quot;margarita_plots.pdf&quot;)
 for (i in 1:length(testFiles)){
   cat(paste0(&quot;\n############## &quot;, i, &quot; &quot;, testFiles[i], &quot; ##############\n&quot;))
-  run_test_file(here(testFiles[i]))
+  o &lt;- run_test_file(here(testFiles[i]), verbose = FALSE)
+  print(summary(o))
 }</code></pre>
 <pre><code>## 
 ## ############## 1 R/margarita/test-getLMrange.R ##############
-## 
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............    0 tests</code></pre>
-<pre><code>## 10000 steps taken</code></pre>
-<pre><code>## 20000 steps taken</code></pre>
-<pre><code>## 30000 steps taken</code></pre>
-<pre><code>## 40000 steps taken</code></pre>
-<pre><code>## Acceptance rate:0.319</code></pre>
-<pre><code>## 
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............    0 tests    
-test-getLMrange.R.............   45 tests [0;32mOK[0m [0;34m1.3s[0m
+##                    
+## File                Results fails passes
+##   test-getLMrange.R      45     0     45
+##   Total                  45     0     45
 ## 
 ## ############## 2 R/margarita/test-helpers.R ##############
+##                 
+## File             Results fails passes
+##   test-helpers.R      26     0     26
+##   Total               26     0     26
 ## 
-test-helpers.R................    0 tests    
-test-helpers.R................    1 tests [0;32mOK[0m 
-test-helpers.R................    2 tests [0;32mOK[0m 
-test-helpers.R................    3 tests [0;32mOK[0m 
-test-helpers.R................    4 tests [0;32mOK[0m 
-test-helpers.R................    5 tests [0;32mOK[0m 
-test-helpers.R................    5 tests [0;32mOK[0m 
-test-helpers.R................    5 tests [0;32mOK[0m 
-test-helpers.R................    8 tests [0;32mOK[0m 
-test-helpers.R................    8 tests [0;32mOK[0m 
-test-helpers.R................    9 tests [0;32mOK[0m 
-test-helpers.R................   10 tests [0;32mOK[0m 
-test-helpers.R................   11 tests [0;32mOK[0m 
-test-helpers.R................   12 tests [0;32mOK[0m 
-test-helpers.R................   13 tests [0;32mOK[0m 
-test-helpers.R................   14 tests [0;32mOK[0m 
-test-helpers.R................   15 tests [0;32mOK[0m 
-test-helpers.R................   15 tests [0;32mOK[0m 
-test-helpers.R................   15 tests [0;32mOK[0m 
-test-helpers.R................   16 tests [0;32mOK[0m 
-test-helpers.R................   16 tests [0;32mOK[0m 
-test-helpers.R................   17 tests [0;32mOK[0m 
-test-helpers.R................   17 tests [0;32mOK[0m 
-test-helpers.R................   18 tests [0;32mOK[0m 
-test-helpers.R................   19 tests [0;32mOK[0m 
-test-helpers.R................   19 tests [0;32mOK[0m 
-test-helpers.R................   19 tests [0;32mOK[0m 
-test-helpers.R................   19 tests [0;32mOK[0m 
-test-helpers.R................   20 tests [0;32mOK[0m 
-test-helpers.R................   21 tests [0;32mOK[0m 
-test-helpers.R................   21 tests [0;32mOK[0m 
-test-helpers.R................   21 tests [0;32mOK[0m 
-test-helpers.R................   21 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   22 tests [0;32mOK[0m 
-test-helpers.R................   23 tests [0;32mOK[0m 
-test-helpers.R................   23 tests [0;32mOK[0m 
-test-helpers.R................   23 tests [0;32mOK[0m 
-test-helpers.R................   23 tests [0;32mOK[0m 
-test-helpers.R................   24 tests [0;32mOK[0m 
-test-helpers.R................   24 tests [0;32mOK[0m 
-test-helpers.R................   24 tests [0;32mOK[0m 
-test-helpers.R................   24 tests [0;32mOK[0m 
-test-helpers.R................   25 tests [0;32mOK[0m 
-test-helpers.R................   25 tests [0;32mOK[0m 
-test-helpers.R................   25 tests [0;32mOK[0m 
-test-helpers.R................   25 tests [0;32mOK[0m 
-test-helpers.R................   26 tests [0;32mOK[0m [0;34m0.4s[0m
-## 
-## ############## 3 R/margarita/test-plots.R ##############
-## 
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests    
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests</code></pre>
-<pre><code>## 
-test-plots.R..................    0 tests    [0;34m5.7s[0m
+## ############## 3 R/margarita/test-plots.R ##############</code></pre>
+<pre><code>##        
+## File    Results fails passes
+##   Total       0     0      0
 ## 
 ## ############## 4 R/margarita/test-simulate.R ##############
-## 
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    0 tests    
-test-simulate.R...............    1 tests [0;32mOK[0m 
-test-simulate.R...............    1 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    2 tests [0;32mOK[0m 
-test-simulate.R...............    3 tests [0;32mOK[0m 
-test-simulate.R...............    4 tests [0;32mOK[0m 
-test-simulate.R...............    5 tests [0;32mOK[0m 
-test-simulate.R...............    6 tests [0;32mOK[0m 
-test-simulate.R...............    6 tests [0;32mOK[0m 
-test-simulate.R...............    7 tests [0;32mOK[0m 
-test-simulate.R...............    7 tests [0;32mOK[0m 
-test-simulate.R...............    7 tests [0;32mOK[0m 
-test-simulate.R...............    7 tests [0;32mOK[0m 
-test-simulate.R...............    7 tests [0;32mOK[0m 
-test-simulate.R...............    8 tests [0;32mOK[0m 
-test-simulate.R...............    9 tests [0;32mOK[0m 
-test-simulate.R...............   10 tests [0;32mOK[0m 
-test-simulate.R...............   10 tests [0;32mOK[0m 
-test-simulate.R...............   11 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   31 tests [0;32mOK[0m 
-test-simulate.R...............   32 tests [0;32mOK[0m 
-test-simulate.R...............   33 tests [0;32mOK[0m 
-test-simulate.R...............   34 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   35 tests [0;32mOK[0m 
-test-simulate.R...............   36 tests [0;32mOK[0m 
-test-simulate.R...............   37 tests [0;32mOK[0m [0;34m2.5s[0m</code></pre>
+##                  
+## File              Results fails passes
+##   test-simulate.R      37     0     37
+##   Total                37     0     37</code></pre>
 <pre class="r"><code>dev.off()</code></pre>
 <pre><code>## png 
 ##   2</code></pre>
@@ -2389,19 +593,21 @@ length(testFiles)</code></pre>
 <pre><code>## [1] 1</code></pre>
 <pre class="r"><code>for (i in 1:length(testFiles)){
   cat(paste0(&quot;\n############## &quot;, i, &quot; &quot;, testFiles[i], &quot; ##############\n&quot;))
-  run_test_file(here(testFiles[i]))
+  o &lt;- run_test_file(here(testFiles[i]), verbose = FALSE)
+  print(summary(o))
 }</code></pre>
 <pre><code>## 
-## ############## 1 R/lmr/test-lmr.R ##############
-## 
-test-lmr.R....................    0 tests    
-test-lmr.R....................   30 tests [0;32mOK[0m 
-test-lmr.R....................   30 tests [0;32mOK[0m 
-test-lmr.R....................   30 tests [0;32mOK[0m 
-test-lmr.R....................   90 tests [0;32mOK[0m 
-test-lmr.R....................   90 tests [0;32mOK[0m 
-test-lmr.R....................   90 tests [0;32mOK[0m 
-test-lmr.R....................  140 tests [0;32mOK[0m [0;34m2.2s[0m</code></pre>
+## ############## 1 R/lmr/test-lmr.R ##############</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;RobStatTM&#39;:
+##   method                   from  
+##   print.summary.covClassic robust
+##   print.summary.covRob     robust
+##   summary.covClassic       robust
+##   summary.covRob           robust</code></pre>
+<pre><code>##             
+## File         Results fails passes
+##   test-lmr.R     140     0    140
+##   Total          140     0    140</code></pre>
 </div>
 </div>
 <div id="appendix" class="section level2">
@@ -2412,8 +618,8 @@ test-lmr.R....................  140 tests [0;32mOK[0m [0;34m2.2s[0m</code></
 <p><strong>Platform:</strong> x86_64-pc-linux-gnu (64-bit)</p>
 <p><strong>locale:</strong> <em>LC_CTYPE=en_GB.UTF-8</em>, <em>LC_NUMERIC=C</em>, <em>LC_TIME=en_GB.UTF-8</em>, <em>LC_COLLATE=en_GB.UTF-8</em>, <em>LC_MONETARY=en_GB.UTF-8</em>, <em>LC_MESSAGES=en_GB.UTF-8</em>, <em>LC_PAPER=en_GB.UTF-8</em>, <em>LC_NAME=C</em>, <em>LC_ADDRESS=C</em>, <em>LC_TELEPHONE=C</em>, <em>LC_MEASUREMENT=en_GB.UTF-8</em> and <em>LC_IDENTIFICATION=C</em></p>
 <p><strong>attached base packages:</strong> <em>stats</em>, <em>graphics</em>, <em>grDevices</em>, <em>utils</em>, <em>datasets</em>, <em>methods</em> and <em>base</em></p>
-<p><strong>other attached packages:</strong> <em>render(v.0.4.5)</em>, <em>flextable(v.0.7.0)</em>, <em>here(v.1.0.1)</em>, <em>kableExtra(v.1.3.4)</em>, <em>rmarkdown(v.2.14)</em>, <em>lmr(v.0.1)</em>, <em>margarita(v.0.25)</em>, <em>formattable(v.0.2.1)</em>, <em>scales(v.1.2.0)</em>, <em>xtable(v.1.8-4)</em>, <em>gridExtra(v.2.3)</em>, <em>robust(v.0.7-0)</em>, <em>fit.models(v.0.64)</em>, <em>robustbase(v.0.95-0)</em>, <em>forcats(v.0.5.1)</em>, <em>stringr(v.1.4.0)</em>, <em>dplyr(v.1.0.9)</em>, <em>purrr(v.0.3.4)</em>, <em>readr(v.2.1.2)</em>, <em>tidyr(v.1.2.0)</em>, <em>tibble(v.3.1.7)</em>, <em>tidyverse(v.1.3.1)</em>, <em>survival(v.3.2-13)</em>, <em>ismev(v.1.42)</em>, <em>mgcv(v.1.8-40)</em>, <em>nlme(v.3.1-157)</em>, <em>MASS(v.7.3-56)</em>, <em>tinytest(v.1.3.1)</em>, <em>texmex(v.2.4.8)</em>, <em>ggplot2(v.3.3.6)</em> and <em>mvtnorm(v.1.1-3)</em></p>
-<p><strong>loaded via a namespace (and not attached):</strong> <em>fs(v.1.5.2)</em>, <em>lubridate(v.1.8.0)</em>, <em>webshot(v.0.5.3)</em>, <em>httr(v.1.4.2)</em>, <em>rprojroot(v.2.0.3)</em>, <em>RobStatTM(v.1.0.5)</em>, <em>bslib(v.0.3.1)</em>, <em>tools(v.4.2.0)</em>, <em>backports(v.1.4.1)</em>, <em>utf8(v.1.2.2)</em>, <em>R6(v.2.5.1)</em>, <em>DBI(v.1.1.2)</em>, <em>colorspace(v.2.0-3)</em>, <em>withr(v.2.5.0)</em>, <em>tidyselect(v.1.1.2)</em>, <em>compiler(v.4.2.0)</em>, <em>cli(v.3.3.0)</em>, <em>rvest(v.1.0.2)</em>, <em>xml2(v.1.3.3)</em>, <em>officer(v.0.4.2)</em>, <em>sass(v.0.4.1)</em>, <em>labeling(v.0.4.2)</em>, <em>DEoptimR(v.1.0-11)</em>, <em>systemfonts(v.1.0.4)</em>, <em>digest(v.0.6.29)</em>, <em>svglite(v.2.1.0)</em>, <em>base64enc(v.0.1-3)</em>, <em>rrcov(v.1.7-0)</em>, <em>pkgconfig(v.2.0.3)</em>, <em>htmltools(v.0.5.2)</em>, <em>dbplyr(v.2.1.1)</em>, <em>fastmap(v.1.1.0)</em>, <em>htmlwidgets(v.1.5.4)</em>, <em>rlang(v.1.0.2)</em>, <em>readxl(v.1.4.0)</em>, <em>rstudioapi(v.0.13)</em>, <em>jquerylib(v.0.1.4)</em>, <em>generics(v.0.1.2)</em>, <em>farver(v.2.1.0)</em>, <em>jsonlite(v.1.8.0)</em>, <em>zip(v.2.2.0)</em>, <em>magrittr(v.2.0.3)</em>, <em>Matrix(v.1.4-1)</em>, <em>Rcpp(v.1.0.8.3)</em>, <em>munsell(v.0.5.0)</em>, <em>fansi(v.1.0.3)</em>, <em>gdtools(v.0.2.4)</em>, <em>lifecycle(v.1.0.1)</em>, <em>stringi(v.1.7.6)</em>, <em>yaml(v.2.3.5)</em>, <em>grid(v.4.2.0)</em>, <em>parallel(v.4.2.0)</em>, <em>crayon(v.1.5.1)</em>, <em>lattice(v.0.20-45)</em>, <em>haven(v.2.5.0)</em>, <em>splines(v.4.2.0)</em>, <em>pander(v.0.6.5)</em>, <em>hms(v.1.1.1)</em>, <em>knitr(v.1.39)</em>, <em>pyinit(v.1.1.3)</em>, <em>pillar(v.1.7.0)</em>, <em>uuid(v.1.1-0)</em>, <em>stats4(v.4.2.0)</em>, <em>reprex(v.2.0.1)</em>, <em>glue(v.1.6.2)</em>, <em>evaluate(v.0.15)</em>, <em>data.table(v.1.14.2)</em>, <em>modelr(v.0.1.8)</em>, <em>vctrs(v.0.4.1)</em>, <em>tzdb(v.0.3.0)</em>, <em>cellranger(v.1.1.0)</em>, <em>gtable(v.0.3.0)</em>, <em>assertthat(v.0.2.1)</em>, <em>xfun(v.0.30)</em>, <em>broom(v.0.8.0)</em>, <em>viridisLite(v.0.4.0)</em>, <em>pcaPP(v.2.0-1)</em> and <em>ellipsis(v.0.3.2)</em></p>
+<p><strong>other attached packages:</strong> <em>robust(v.0.7-0)</em>, <em>fit.models(v.0.64)</em>, <em>robustbase(v.0.95-0)</em>, <em>survival(v.3.2-13)</em>, <em>ismev(v.1.42)</em>, <em>mgcv(v.1.8-40)</em>, <em>nlme(v.3.1-157)</em>, <em>MASS(v.7.3-57)</em>, <em>tinytest(v.1.3.1)</em>, <em>lmr(v.0.1)</em>, <em>margarita(v.0.25)</em>, <em>formattable(v.0.2.1)</em>, <em>scales(v.1.2.0)</em>, <em>xtable(v.1.8-4)</em>, <em>gridExtra(v.2.3)</em>, <em>texmex(v.2.4.8)</em>, <em>mvtnorm(v.1.1-3)</em>, <em>render(v.0.4.5)</em>, <em>flextable(v.0.7.0)</em>, <em>here(v.1.0.1)</em>, <em>forcats(v.0.5.1)</em>, <em>stringr(v.1.4.0)</em>, <em>dplyr(v.1.0.9)</em>, <em>purrr(v.0.3.4)</em>, <em>readr(v.2.1.2)</em>, <em>tidyr(v.1.2.0)</em>, <em>tibble(v.3.1.7)</em>, <em>ggplot2(v.3.3.6)</em>, <em>tidyverse(v.1.3.1)</em>, <em>kableExtra(v.1.3.4)</em> and <em>rmarkdown(v.2.14)</em></p>
+<p><strong>loaded via a namespace (and not attached):</strong> <em>fs(v.1.5.2)</em>, <em>lubridate(v.1.8.0)</em>, <em>webshot(v.0.5.3)</em>, <em>httr(v.1.4.2)</em>, <em>rprojroot(v.2.0.3)</em>, <em>RobStatTM(v.1.0.5)</em>, <em>tools(v.4.2.0)</em>, <em>backports(v.1.4.1)</em>, <em>bslib(v.0.3.1)</em>, <em>utf8(v.1.2.2)</em>, <em>R6(v.2.5.1)</em>, <em>DBI(v.1.1.2)</em>, <em>colorspace(v.2.0-3)</em>, <em>withr(v.2.5.0)</em>, <em>tidyselect(v.1.1.2)</em>, <em>compiler(v.4.2.0)</em>, <em>cli(v.3.3.0)</em>, <em>rvest(v.1.0.2)</em>, <em>xml2(v.1.3.3)</em>, <em>officer(v.0.4.2)</em>, <em>labeling(v.0.4.2)</em>, <em>sass(v.0.4.1)</em>, <em>DEoptimR(v.1.0-11)</em>, <em>systemfonts(v.1.0.4)</em>, <em>digest(v.0.6.29)</em>, <em>svglite(v.2.1.0)</em>, <em>rrcov(v.1.7-0)</em>, <em>base64enc(v.0.1-3)</em>, <em>pkgconfig(v.2.0.3)</em>, <em>htmltools(v.0.5.2)</em>, <em>dbplyr(v.2.1.1)</em>, <em>fastmap(v.1.1.0)</em>, <em>htmlwidgets(v.1.5.4)</em>, <em>rlang(v.1.0.2)</em>, <em>readxl(v.1.4.0)</em>, <em>rstudioapi(v.0.13)</em>, <em>farver(v.2.1.0)</em>, <em>jquerylib(v.0.1.4)</em>, <em>generics(v.0.1.2)</em>, <em>jsonlite(v.1.8.0)</em>, <em>zip(v.2.2.0)</em>, <em>magrittr(v.2.0.3)</em>, <em>Matrix(v.1.4-1)</em>, <em>Rcpp(v.1.0.8.3)</em>, <em>munsell(v.0.5.0)</em>, <em>fansi(v.1.0.3)</em>, <em>gdtools(v.0.2.4)</em>, <em>lifecycle(v.1.0.1)</em>, <em>stringi(v.1.7.6)</em>, <em>yaml(v.2.3.5)</em>, <em>grid(v.4.2.0)</em>, <em>parallel(v.4.2.0)</em>, <em>crayon(v.1.5.1)</em>, <em>lattice(v.0.20-45)</em>, <em>splines(v.4.2.0)</em>, <em>haven(v.2.5.0)</em>, <em>pander(v.0.6.5)</em>, <em>hms(v.1.1.1)</em>, <em>pyinit(v.1.1.3)</em>, <em>knitr(v.1.39)</em>, <em>pillar(v.1.7.0)</em>, <em>uuid(v.1.1-0)</em>, <em>stats4(v.4.2.0)</em>, <em>reprex(v.2.0.1)</em>, <em>glue(v.1.6.2)</em>, <em>evaluate(v.0.15)</em>, <em>data.table(v.1.14.2)</em>, <em>modelr(v.0.1.8)</em>, <em>vctrs(v.0.4.1)</em>, <em>tzdb(v.0.3.0)</em>, <em>cellranger(v.1.1.0)</em>, <em>gtable(v.0.3.0)</em>, <em>assertthat(v.0.2.1)</em>, <em>xfun(v.0.30)</em>, <em>broom(v.0.8.0)</em>, <em>pcaPP(v.2.0-1)</em>, <em>viridisLite(v.0.4.0)</em> and <em>ellipsis(v.0.3.2)</em></p>
 </div>
 <div id="references" class="section level3 unnumbered">
 <h3 class="unnumbered">References</h3>
