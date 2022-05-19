@@ -1,6 +1,5 @@
 ---
 title: "Running the texmex, margarita and lmr test suites"
-subtitle: "DRAFT"
 author: "Harry Southworth"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
@@ -37,16 +36,13 @@ theFormat <- "html"
 ```
 
 # {.tabset}
-```{r, echo=FALSE, results = "asis"}
-printcv()
-```
+
 
 ## Introduction
 The <a href="https://github.com/harrysouthworth/texmex">texmex</a> [@texmex],
 <a href="https://github.com/harrysouthworth/margarita">margarita</a> and
 <a href="https://github.com/harrysouthworth/lmr">lmr</a>
-packages have
-testing suites that rely on
+packages have testing suites that rely on
 the testthat package [@testthat]. The test suites don't currently run,
 apparently due to changes in testthat.
 

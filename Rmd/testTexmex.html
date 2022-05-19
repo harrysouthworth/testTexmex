@@ -191,22 +191,18 @@ pre code {
 
 
 <h1 class="title toc-ignore">Running the texmex, margarita and lmr test suites</h1>
-<h3 class="subtitle">DRAFT</h3>
 <h4 class="author">Harry Southworth</h4>
-<h4 class="date">17 May, 2022</h4>
+<h4 class="date">19 May, 2022</h4>
 
 </div>
 
 
 <div id="section" class="section level1 tabset">
 <h1 class="tabset"></h1>
-<div class="watermark">
-DRAFT <span style="color:white; font-size:xx-small;">a5cec6a</span>
-</div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>The <a href="https://github.com/harrysouthworth/texmex">texmex</a> <span class="citation">(Southworth, Heffernan, and Metcalfe 2017)</span>, <a href="https://github.com/harrysouthworth/margarita">margarita</a> and <a href="https://github.com/harrysouthworth/lmr">lmr</a> packages have testing suites that rely on the testthat package <span class="citation">(Wickham 2011)</span>. The test suites don’t currently run, apparently due to changes in testthat.</p>
-<p>Here, we run versions of the texmex test functions that depend not on testthat, but on tinytest <span class="citation">(<strong>tinytest?</strong>)</span>.</p>
+<p>Here, we run versions of the texmex test functions that depend not on testthat, but on tinytest <span class="citation">(van der Loo 2020)</span>.</p>
 <p>Output appears below, followed by a summary of the R session.</p>
 <p>The plots appear in the pdf file.</p>
 </div>
@@ -626,6 +622,9 @@ length(testFiles)</code></pre>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-texmex" class="csl-entry">
 Southworth, H., J. E. Heffernan, and P. D. Metcalfe. 2017. <em>Texmex: Statistical Modelling of Extreme Values</em>.
+</div>
+<div id="ref-tinytest" class="csl-entry">
+van der Loo, MPJ. 2020. <span>“A Method for Deriving Information from Running r Code.”</span> <em>The R Journal</em>, Accepted for publication. <a href="https://arxiv.org/abs/2002.07472">https://arxiv.org/abs/2002.07472</a>.
 </div>
 <div id="ref-testthat" class="csl-entry">
 Wickham, Hadley. 2011. <span>“Testthat: Get Started with Testing.”</span> <em>The R Journal</em> 3: 5–10. <a href="http://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">http://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>.
