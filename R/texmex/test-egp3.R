@@ -1,5 +1,5 @@
 ## texmex erroneously does not export qegp3 (2022-05-10)
-qegp3 <- texmex:::qegp3
+##qegp3 <- texmex:::qegp3
 
 library(MASS)
 rmod <- rlm(log(ALT.M) ~ log(ALT.B) + as.numeric(dose), data=liver, method="MM", c=3.44)

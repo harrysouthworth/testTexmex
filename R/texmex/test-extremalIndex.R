@@ -8,7 +8,7 @@ for(i in 1:length(th)){
   texmex.clust <- declust(texmex.ei)
 
   Ferro.runs <-  texmex:::.extRemes.decluster.runs(rain> th[i], 3)
-  texmex.runs <- declust(rain,threshold=th[i],r=3,verbose=FALSE)
+  texmex.runs <- declust(rain, threshold=th[i], r=3, verbose=FALSE)
 
   expect_equal(texmex.ei$EIintervals, Ferro.ei, tolerance = tol,
                info="extremalIndex: extRemes implementation")
@@ -25,8 +25,8 @@ data <- data.frame(RAIN=rain[1:1000], rnorm=rnorm(1000), num=1:1000)
 extremalIndexRangeFit(RAIN, data,verbose=FALSE,nboot=10,nint=7)
 extremalIndexRangeFit(data$RAIN,verbose=FALSE,nboot=10,nint=7)
 
-data.de <- declust(RAIN,data=data,th=th[1],verb=FALSE)
-resp.de <- declust(data$RAIN,th=th[1],verb=FALSE)
+data.de <- declust(RAIN, data=data, th=th[1], verb=FALSE)
+resp.de <- declust(data$RAIN, th=th[1], verb=FALSE)
 
 data.ei <- extremalIndex(RAIN,data=data,threshold=th[1])
 resp.ei <- extremalIndex(data$RAIN,threshold=th[1])
@@ -40,7 +40,7 @@ expect_equal(data.de$clusters, resp.de$clusters, tolerance=tol,
 
 ei <- extremalIndex(SO2,data=winter,threshold=20)
 d <- declust(ei)
-evm(d,phi=~NO)
+##evm(d, phi = ~NO)
 
 expect_equal(662.9508, as.numeric(AIC(evm(d, phi=~NO))[1]), tolerance=tol,
              info="extremalIndex: covariate fitting after declustering")

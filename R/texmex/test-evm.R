@@ -161,9 +161,9 @@ expect_true(4-coef(mod3)[1]>4-coef(mod8)[1])
 # 3.0 Reproduce Coles, page 119. Reported log-likelihood is -484.6.
 
 rtime <- (1:length(rain))/1000
-d <- data.frame(rainfall = rain, time=rtime)
+d <- data.frame(rainfall = rain, time = rtime)
 
-mod <- evm(rainfall, th=30, data=d, phi= ~ time, penalty="none")
+mod <- evm(rainfall, th=30, data = d, phi= ~ time, penalty="none")
 
 expect_equal(-484.6, mod$loglik, tolerance=tol,
              info="gpd: loglik Coles page 119")

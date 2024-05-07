@@ -1,6 +1,6 @@
 for(Family in list(gpd,gev)){
   pst <- function(msg) texmexPst(msg,Family=Family)
-  set.seed(20130617)
+  set.seed(12345)
 
   for(i in 1:5){
     th <- switch(Family$name,GPD=0.3,GEV=-Inf)
@@ -28,7 +28,7 @@ for(Family in list(gpd,gev)){
     param <- switch(Family$name,GPD=X,GEV=cbind(mu,X))
     th <- switch(Family$name,GPD=0,GEV=-Inf)
     X$Y <- Family$rng(n,param,list(threshold=th))
-    fit <- evm(Y,data=X,phi=~a,xi=~b,th=th,family=Family)
+    fit <- evm("Y",data=X,phi=~a,xi=~b,th=th,family=Family)
     lp <- linearPredictors(fit)$link
     ep.current <- endPoint(fit,verbose=FALSE,.unique=FALSE)
     ep.target <- switch(Family$name,GPD=ifelse(lp[,2] < 0, th-exp(lp[,1])/lp[,2],Inf),
